@@ -17,7 +17,6 @@ import de.cas_ual_ty.ydm.duel.screen.widget.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -348,7 +347,6 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
         }
     }
     
-    @Override
     protected void renderLabels(PoseStack ms, int x, int y)
     {
     }
@@ -360,7 +358,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
         
         if(lifePointsWidget != null && lifePointsWidget.isFocused() && !lifePointsWidget.isMouseOver(mouseX, mouseY))
         {
-            lifePointsWidget.setFocus(false);
+            lifePointsWidget.setFocused(false);
         }
         
         if(button == GLFW.GLFW_MOUSE_BUTTON_2)

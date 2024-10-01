@@ -87,7 +87,6 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
         }
     }
     
-    @Override
     protected void renderLabels(PoseStack ms, int mouseX, int mouseY)
     {
         font.draw(ms, "Choose your decks...", 8.0F, 6.0F, 0x404040);

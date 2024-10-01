@@ -46,16 +46,15 @@ public class LPTextFieldWidget extends EditBox
         });
     }
     
-    @Override
     public void renderButton(PoseStack ms, int mouseX, int mouseY, float partialTicks)
     {
-        x *= 2;
-        y *= 2;
+        setX(getX() * 2);
+        setY(getY() * 2);
         width *= 2;
         height *= 2;
         
-        x += 1;
-        y += 1;
+        setX(getX() + 1);
+        setY(getY() + 1);
         width -= 2;
         height -= 2;
         
@@ -66,13 +65,13 @@ public class LPTextFieldWidget extends EditBox
         
         ms.popPose();
         
-        x -= 1;
-        y -= 1;
+        setX(getX() - 1);
+        setY(getY() - 1);
         width += 2;
         height += 2;
         
-        x /= 2;
-        y /= 2;
+        setX(getX() / 2);
+        setY(getY() / 2);
         width /= 2;
         height /= 2;
         
@@ -96,4 +95,5 @@ public class LPTextFieldWidget extends EditBox
         enableBackgroundDrawing = enableBackgroundDrawingIn;
         super.setBordered(enableBackgroundDrawingIn);
     }
+
 }

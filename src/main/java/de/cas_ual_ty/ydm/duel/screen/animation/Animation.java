@@ -1,9 +1,8 @@
 package de.cas_ual_ty.ydm.duel.screen.animation;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.components.Widget;
 
-public abstract class Animation implements Widget
+public abstract class Animation implements org.jline.reader.Widget
 {
     public Runnable onStart;
     public Runnable onEnd;
@@ -54,7 +53,6 @@ public abstract class Animation implements Widget
         return tickTime >= maxTickTime;
     }
     
-    @Override
     public abstract void render(PoseStack ms, int mouseX, int mouseY, float partialTicks);
     
     /**

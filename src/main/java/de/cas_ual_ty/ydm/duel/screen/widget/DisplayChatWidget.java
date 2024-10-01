@@ -6,6 +6,7 @@ import de.cas_ual_ty.ydm.clientutil.ClientProxy;
 import de.cas_ual_ty.ydm.clientutil.ScreenUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
@@ -25,8 +26,7 @@ public class DisplayChatWidget extends AbstractWidget
         textSupplier = null;
     }
     
-    @Override
-    public void render(PoseStack PoseStack, int mouseX, int mouseY, float partialTicks)
+    public void render(GuiGraphics PoseStack, int mouseX, int mouseY, float partialTicks)
     {
         if(textSupplier != null)
         {
@@ -34,7 +34,6 @@ public class DisplayChatWidget extends AbstractWidget
         }
     }
     
-    @Override
     public void renderButton(PoseStack ms, int mouseX, int mouseY, float partialTicks)
     {
         Minecraft minecraft = Minecraft.getInstance();
@@ -45,7 +44,7 @@ public class DisplayChatWidget extends AbstractWidget
         RenderSystem.enableDepthTest();
         RenderSystem.setShaderColor(1F, 1F, 1F, alpha);
         int color = getFGColor();
-        DisplayChatWidget.drawLines(ms, fontrenderer, textSupplier.get(), x, y, width, height, color, (float) ClientProxy.duelChatSize);
+        DisplayChatWidget.drawLines(ms, fontrenderer, textSupplier.get(), getX(), getY(), width, height, color, (float) ClientProxy.duelChatSize);
     }
     
     public DisplayChatWidget setTextSupplier(Supplier<List<Component>> textSupplier)
@@ -100,10 +99,5 @@ public class DisplayChatWidget extends AbstractWidget
         
         ms.popPose();
     }
-    
-    @Override
-    public void updateNarration(NarrationElementOutput pNarrationElementOutput)
-    {
-    
-    }
+
 }

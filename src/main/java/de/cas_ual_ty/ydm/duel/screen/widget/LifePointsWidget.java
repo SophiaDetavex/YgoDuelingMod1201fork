@@ -6,6 +6,7 @@ import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.clientutil.widget.ITooltip;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
@@ -31,7 +32,6 @@ public class LifePointsWidget extends AbstractWidget
         this.tooltip = tooltip;
     }
     
-    @Override
     public void renderButton(PoseStack ms, int mouseX, int mouseY, float partialTicks)
     {
         Minecraft minecraft = Minecraft.getInstance();
@@ -44,8 +44,8 @@ public class LifePointsWidget extends AbstractWidget
         float relativeLP = Math.min(1F, lp / (float) maxLP);
         
         final int margin = 1;
-        int x = this.x;
-        int y = this.y;
+        int x = this.getX();
+        int y = this.getY();
         int w = width;
         int h = height;
         
@@ -56,8 +56,8 @@ public class LifePointsWidget extends AbstractWidget
         blit(ms, x, y, 0, 2 * 8, width, height);
         renderBg(ms, minecraft, mouseX, mouseY);
         
-        x = this.x + width / 2;
-        y = this.y + height / 2;
+        x = this.getX() + width / 2;
+        y = this.getY() + height / 2;
         
         ms.pushPose();
         
@@ -72,11 +72,5 @@ public class LifePointsWidget extends AbstractWidget
         {
             tooltip.onTooltip(this, ms, mouseX, mouseY);
         }
-    }
-    
-    @Override
-    public void updateNarration(NarrationElementOutput pNarrationElementOutput)
-    {
-    
     }
 }

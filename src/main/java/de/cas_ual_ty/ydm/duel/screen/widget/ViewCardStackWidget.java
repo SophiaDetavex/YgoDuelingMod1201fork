@@ -107,7 +107,6 @@ public class ViewCardStackWidget extends Button
         return cards;
     }
     
-    @Override
     public void renderButton(PoseStack ms, int mouseX, int mouseY, float partialTicks)
     {
         Minecraft minecraft = Minecraft.getInstance();
@@ -128,7 +127,7 @@ public class ViewCardStackWidget extends Button
         }
         
         int j = getFGColor();
-        Screen.drawCenteredString(ms, fontrenderer, getMessage(), x, y, j | Mth.ceil(alpha * 255.0F) << 24);
+        Screen.drawCenteredString(ms, fontrenderer, getMessage(), getX(), getY(), j | Mth.ceil(alpha * 255.0F) << 24);
     }
     
     @Nullable
@@ -145,8 +144,8 @@ public class ViewCardStackWidget extends Button
         {
             for(int j = 0; j < columns && index < cards.size(); ++j)
             {
-                x = this.x + j * cardsTextureSize;
-                y = this.y + i * cardsTextureSize;
+                x = this.getX() + j * cardsTextureSize;
+                y = this.getY() + i * cardsTextureSize;
                 
                 c = cards.get(index++);
                 

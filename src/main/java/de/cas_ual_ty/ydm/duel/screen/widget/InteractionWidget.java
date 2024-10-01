@@ -31,7 +31,6 @@ public class InteractionWidget extends Button
         this.context = context;
     }
     
-    @Override
     public void renderButton(PoseStack ms, int mouseX, int mouseY, float partialTicks)
     {
         ms.pushPose();
@@ -60,11 +59,11 @@ public class InteractionWidget extends Button
         RenderSystem.enableDepthTest();
         
         RenderSystem.setShaderTexture(0, icon.sourceFile);
-        YdmBlitUtil.blit(ms, x + (width - iconWidth) / 2, y + (height - iconHeight) / 2, iconWidth, iconHeight, icon.iconX, icon.iconY, icon.iconWidth, icon.iconHeight, icon.fileSize, icon.fileSize);
+        YdmBlitUtil.blit(ms, getX() + (width - iconWidth) / 2, getY() + (height - iconHeight) / 2, iconWidth, iconHeight, icon.iconX, icon.iconY, icon.iconWidth, icon.iconHeight, icon.fileSize, icon.fileSize);
         
         if(isHoveredOrFocused() && active)
         {
-            ScreenUtil.renderHoverRect(ms, x, y, width, height);
+            ScreenUtil.renderHoverRect(ms, getX(), getY(), width, height);
             renderToolTip(ms, mouseX, mouseY);
         }
         

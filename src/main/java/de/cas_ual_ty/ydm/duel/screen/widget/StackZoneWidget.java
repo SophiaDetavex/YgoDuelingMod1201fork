@@ -33,7 +33,7 @@ public class StackZoneWidget extends ZoneWidget
         RenderSystem.enableDepthTest();
         RenderSystem.setShaderColor(1F, 1F, 1F, alpha);
         
-        renderZoneSelectRect(ms, zone, x, y, width, height);
+        renderZoneSelectRect(ms, zone, getX(), getY(), width, height);
         
         hoverCard = renderCards(ms, mouseX, mouseY);
         
@@ -46,7 +46,7 @@ public class StackZoneWidget extends ZoneWidget
             ms.pushPose();
             ms.translate(0, 0, 0.03F);
             Screen.drawCenteredString(ms, fontrenderer, Component.literal(String.valueOf(zone.getCardsAmount())),
-                    x + width / 2, y + height / 2 - fontrenderer.lineHeight / 2,
+                    getX() + width / 2, getY() + height / 2 - fontrenderer.lineHeight / 2,
                     16777215 | Mth.ceil(alpha * 255.0F) << 24);
             ms.popPose();
         }
@@ -57,7 +57,7 @@ public class StackZoneWidget extends ZoneWidget
             {
                 if(zone.getCardsAmount() == 0)
                 {
-                    ScreenUtil.renderHoverRect(ms, x, y, width, height);
+                    ScreenUtil.renderHoverRect(ms, getX(), getY(), width, height);
                 }
                 
                 renderToolTip(ms, mouseX, mouseY);
@@ -65,7 +65,7 @@ public class StackZoneWidget extends ZoneWidget
         }
         else
         {
-            ScreenUtil.renderDisabledRect(ms, x, y, width, height);
+            ScreenUtil.renderDisabledRect(ms, getX(), getY(), width, height);
         }
     }
     

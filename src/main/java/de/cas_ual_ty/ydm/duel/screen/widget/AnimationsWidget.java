@@ -39,7 +39,6 @@ public class AnimationsWidget extends AbstractWidget
         }
     }
     
-    @Override
     public void render(PoseStack ms, int mouseX, int mouseY, float partialTicks)
     {
         RenderSystem.setShaderColor(1F, 1F, 1F, alpha);
@@ -83,9 +82,4 @@ public class AnimationsWidget extends AbstractWidget
         }
     }
     
-    @Override
-    public void updateNarration(NarrationElementOutput pNarrationElementOutput)
-    {
-    
-    }
 }

@@ -46,7 +46,7 @@ public class DuelEntity extends Entity implements MenuProvider
     {
         super.tick();
         
-        if(!level.isClientSide)
+        if(!level().isClientSide)
         {
             if(!hasEverStarted)
             {
@@ -102,7 +102,7 @@ public class DuelEntity extends Entity implements MenuProvider
     }
     
     @Override
-    public Packet<?> getAddEntityPacket()
+    public Packet getAddEntityPacket()
     {
         return NetworkHooks.getEntitySpawningPacket(this);
     }

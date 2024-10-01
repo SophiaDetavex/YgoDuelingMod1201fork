@@ -55,7 +55,6 @@ public abstract class DuelContainerScreen<E extends DuelContainer> extends Switc
     
     protected Inventory playerInv;
     
-    @SuppressWarnings("unchecked")
     public DuelContainerScreen(E screenContainer, Inventory inv, Component titleIn)
     {
         super(screenContainer, inv, titleIn);
@@ -98,7 +97,6 @@ public abstract class DuelContainerScreen<E extends DuelContainer> extends Switc
         init(minecraft, width, height);
     }
     
-    @Override
     protected void renderBg(PoseStack ms, float partialTicks, int mouseX, int mouseY)
     {
         ScreenUtil.renderDisabledRect(ms, 0, 0, width, height);
@@ -133,7 +131,7 @@ public abstract class DuelContainerScreen<E extends DuelContainer> extends Switc
     {
         if(textFieldWidget != null && textFieldWidget.isFocused() && !textFieldWidget.isMouseOver(mouseX, mouseY))
         {
-            textFieldWidget.setFocus(false);
+            textFieldWidget.setFocused(false);
         }
         
         return super.mouseClicked(mouseX, mouseY, button);
@@ -160,7 +158,6 @@ public abstract class DuelContainerScreen<E extends DuelContainer> extends Switc
         }
     }
     
-    @Override
     public void renderTooltip(PoseStack ms, List<? extends FormattedCharSequence> tooltips, int mouseX, int mouseY)
     {
         ms.pushPose();
@@ -169,7 +166,6 @@ public abstract class DuelContainerScreen<E extends DuelContainer> extends Switc
         ms.popPose();
     }
     
-    @Override
     public void renderTooltip(PoseStack ms, Component text, int mouseX, int mouseY)
     {
         ms.pushPose();

@@ -37,16 +37,16 @@ public class MonsterZoneWidget extends ZoneWidget
         final int cardsTextureSize = cardsHeight;
         
         DuelCard hoveredCard = null;
-        float hoverX = x;
-        float hoverY = y;
+        float hoverX = getX();
+        float hoverY = getY();
         float hoverWidth = cardsWidth;
         float hoverHeight = cardsHeight;
         
         boolean isOwner = zone.getOwner() == context.getZoneOwner();
         boolean isOpponentView = zone.getOwner() != context.getView();
         
-        final int renderX = x;
-        final int renderY = y;
+        final int renderX = getX();
+        final int renderY = getY();
         final int renderWidth = cardsTextureSize;
         final int renderHeight = cardsTextureSize;
         
@@ -74,7 +74,7 @@ public class MonsterZoneWidget extends ZoneWidget
         {
             float margin = cardsWidth - (cardsAmount * cardsWidth - width) / (float) (cardsAmount - 1);
             
-            float hoverXBase = x;
+            float hoverXBase = getX();
             
             boolean renderLeftToRight = !isOpponentView;
             

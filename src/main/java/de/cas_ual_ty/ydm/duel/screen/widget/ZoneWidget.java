@@ -28,6 +28,8 @@ public class ZoneWidget extends Button
     public final IDuelScreenContext context;
     public boolean isFlipped;
     public DuelCard hoverCard;
+	private int x;
+	private int y;
     
     public ZoneWidget(Zone zone, IDuelScreenContext context, int width, int height, Component title, Consumer<ZoneWidget> onPress, OnTooltip onTooltip)
     {
@@ -40,14 +42,14 @@ public class ZoneWidget extends Button
     
     protected void shift()
     {
-        x -= width / 2;
-        y -= height / 2;
+        setX(getX() - width / 2);
+        setY(getY() - height / 2);
     }
     
     protected void unshift()
     {
-        x += width / 2;
-        y += height / 2;
+        setX(getX() + width / 2);
+        setY(getY() + height / 2);
     }
     
     public ZoneWidget flip(int guiWidth, int guiHeight)
@@ -57,14 +59,14 @@ public class ZoneWidget extends Button
         
         unshift();
         
-        x -= guiWidth;
-        y -= guiHeight;
+        setX(getX() - guiWidth);
+        setY(getY() - guiHeight);
         
-        x = -x;
-        y = -y;
+        setX(-getX());
+        setY(-getY());
         
-        x += guiWidth;
-        y += guiHeight;
+        setX(getX() + guiWidth);
+        setY(getY() + guiHeight);
         
         shift();
         
@@ -97,7 +99,6 @@ public class ZoneWidget extends Button
         return this;
     }
     
-    @Override
     public void renderButton(PoseStack ms, int mouseX, int mouseY, float partialTicks)
     {
         Minecraft minecraft = Minecraft.getInstance();
@@ -304,21 +305,21 @@ public class ZoneWidget extends Button
         
         if(interactions.size() == 1)
         {
-            list.add(new InteractionWidget(interactions.get(0), context, x, y, width, height, onPress, onTooltip));
+            list.add(new InteractionWidget(interactions.get(0), context, getX(), getY(), width, height, onPress, onTooltip));
         }
         else if(interactions.size() == 2)
         {
             if(width <= height)
             {
                 // Split them horizontally (1 action on top, 1 on bottom)
-                list.add(new InteractionWidget(interactions.get(0), context, x, y, width, height / 2, onPress, onTooltip));
-                list.add(new InteractionWidget(interactions.get(1), context, x, y + height / 2, width, height / 2, onPress, onTooltip));
+                list.add(new InteractionWidget(interactions.get(0), context, getX(), getY(), width, height / 2, onPress, onTooltip));
+                list.add(new InteractionWidget(interactions.get(1), context, getX(), getY() + height / 2, width, height / 2, onPress, onTooltip));
             }
             else
             {
                 // Split them vertically (1 left, 1 right)
-                list.add(new InteractionWidget(interactions.get(0), context, x, y, width / 2, height, onPress, onTooltip));
-                list.add(new InteractionWidget(interactions.get(1), context, x + width / 2, y, width / 2, height, onPress, onTooltip));
+                list.add(new InteractionWidget(interactions.get(0), context, getX(), getY(), width / 2, height, onPress, onTooltip));
+                list.add(new InteractionWidget(interactions.get(1), context, getX() + width / 2, getY(), width / 2, height, onPress, onTooltip));
             }
         }
         else if(interactions.size() == 3)
@@ -326,32 +327,32 @@ public class ZoneWidget extends Button
             if(width == height)
             {
                 // 1 on top half, 1 bottom left, 1 bottom right
-                list.add(new InteractionWidget(interactions.get(0), context, x, y, width, height / 2, onPress, onTooltip));
-                list.add(new InteractionWidget(interactions.get(1), context, x, y + height / 2, width / 2, height / 2, onPress, onTooltip));
-                list.add(new InteractionWidget(interactions.get(2), context, x + width / 2, y + height / 2, width / 2, height / 2, onPress, onTooltip));
+                list.add(new InteractionWidget(interactions.get(0), context, getX(), getY(), width, height / 2, onPress, onTooltip));
+                list.add(new InteractionWidget(interactions.get(1), context, getX(), getY() + height / 2, width / 2, height / 2, onPress, onTooltip));
+                list.add(new InteractionWidget(interactions.get(2), context, getX() + width / 2, getY() + height / 2, width / 2, height / 2, onPress, onTooltip));
             }
             else if(width < height)
             {
                 // Horizontally split
-                list.add(new InteractionWidget(interactions.get(0), context, x, y, width, height / 3, onPress, onTooltip));
-                list.add(new InteractionWidget(interactions.get(1), context, x, y + height / 3, width, height / 3, onPress, onTooltip));
-                list.add(new InteractionWidget(interactions.get(2), context, x, y + height * 2 / 3, width, height / 3, onPress, onTooltip));
+                list.add(new InteractionWidget(interactions.get(0), context, getX(), getY(), width, height / 3, onPress, onTooltip));
+                list.add(new InteractionWidget(interactions.get(1), context, getX(), getY() + height / 3, width, height / 3, onPress, onTooltip));
+                list.add(new InteractionWidget(interactions.get(2), context, getX(), getY() + height * 2 / 3, width, height / 3, onPress, onTooltip));
             }
             else //if(this.width > this.height)
             {
                 // Vertically split
-                list.add(new InteractionWidget(interactions.get(0), context, x, y, width / 3, height, onPress, onTooltip));
-                list.add(new InteractionWidget(interactions.get(1), context, x + width / 3, y, width / 3, height, onPress, onTooltip));
-                list.add(new InteractionWidget(interactions.get(2), context, x + width * 2 / 3, y, width / 3, height, onPress, onTooltip));
+                list.add(new InteractionWidget(interactions.get(0), context, getX(), getY(), width / 3, height, onPress, onTooltip));
+                list.add(new InteractionWidget(interactions.get(1), context, getX() + width / 3, getY(), width / 3, height, onPress, onTooltip));
+                list.add(new InteractionWidget(interactions.get(2), context, getX() + width * 2 / 3, getY(), width / 3, height, onPress, onTooltip));
             }
         }
         else if(interactions.size() == 4 && width == height)
         {
             // 1 on top left, 1 top right, 1 bottom left, 1 bottom right
-            list.add(new InteractionWidget(interactions.get(0), context, x, y, width / 2, height / 2, onPress, onTooltip));
-            list.add(new InteractionWidget(interactions.get(1), context, x + width / 2, y, width / 2, height / 2, onPress, onTooltip));
-            list.add(new InteractionWidget(interactions.get(2), context, x, y + height / 2, width / 2, height / 2, onPress, onTooltip));
-            list.add(new InteractionWidget(interactions.get(3), context, x + width / 2, y + height / 2, width / 2, height / 2, onPress, onTooltip));
+            list.add(new InteractionWidget(interactions.get(0), context, getX(), getY(), width / 2, height / 2, onPress, onTooltip));
+            list.add(new InteractionWidget(interactions.get(1), context, getX() + width / 2, getY(), width / 2, height / 2, onPress, onTooltip));
+            list.add(new InteractionWidget(interactions.get(2), context, getX(), getY() + height / 2, width / 2, height / 2, onPress, onTooltip));
+            list.add(new InteractionWidget(interactions.get(3), context, getX() + width / 2, getY() + height / 2, width / 2, height / 2, onPress, onTooltip));
         }
         else
         {

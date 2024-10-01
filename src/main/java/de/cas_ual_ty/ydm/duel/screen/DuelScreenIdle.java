@@ -49,7 +49,6 @@ public class DuelScreenIdle<E extends DuelContainer> extends DuelContainerScreen
         addRenderableWidget(new ReadyCheckboxWidget(x + 80, y - 10, 20, 20, "Ready 2", (button) -> ready2ButtonClicked(), () -> getDuelManager().player2Ready, () -> getPlayerRole() == PlayerRole.PLAYER2 && getDuelManager().player1 != null));
     }
     
-    @Override
     protected void renderLabels(PoseStack ms, int mouseX, int mouseY)
     {
         font.draw(ms, "Waiting for players...", 8.0F, 6.0F, 0x404040);

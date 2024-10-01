@@ -33,16 +33,16 @@ public class HandZoneWidget extends ZoneWidget
         final int cardsTextureSize = cardsHeight;
         
         DuelCard hoveredCard = null;
-        float hoverX = x;
-        float hoverY = y;
+        float hoverX = getX();
+        float hoverY = getY();
         float hoverWidth = cardsWidth;
         float hoverHeight = cardsHeight;
         
         boolean isOwner = zone.getOwner() == context.getZoneOwner();
         boolean isOpponentView = zone.getOwner() != context.getView();
         
-        final int renderX = x;
-        final int renderY = y;
+        final int renderX = getX();
+        final int renderY = getY();
         final int renderWidth = cardsTextureSize;
         final int renderHeight = cardsTextureSize;
         
@@ -79,7 +79,7 @@ public class HandZoneWidget extends ZoneWidget
         }
         else
         {
-            float hoverXBase = x;
+            float hoverXBase = getX();
             
             float newRenderX;
             float newHoverX;
