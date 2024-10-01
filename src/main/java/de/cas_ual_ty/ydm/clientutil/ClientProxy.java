@@ -318,9 +318,8 @@ public class ClientProxy implements ISidedProxy
     private void entityRenderers(EntityRenderersEvent.RegisterRenderers event)
     {
         event.registerEntityRenderer(YdmEntityTypes.DUEL.get(), DuelEntityRenderer::new);
-    }
-    
-    @SuppressWarnings("deprecation")
+    }    
+
     private void textureStitchPre(TextureStitchEvent.Pre event)
     {
         if(event.getAtlas().location() != TextureAtlas.LOCATION_BLOCKS)
@@ -523,19 +522,19 @@ public class ClientProxy implements ISidedProxy
                 
                 if(itemStack.getItem() == YdmItems.CARD.get())
                 {
-                    CardRenderUtil.renderCardInfo(event.getPoseStack(), YdmItems.CARD.get().getCardHolder(itemStack), containerScreen);
+                    CardRenderUtil.renderCardInfo(((Object) event).getPoseStack(), YdmItems.CARD.get().getCardHolder(itemStack), containerScreen);
                 }
                 else if(itemStack.getItem() == YdmItems.SET.get())
                 {
-                    renderSetInfo(event.getPoseStack(), YdmItems.SET.get().getCardSet(itemStack), containerScreen.getGuiLeft());
+                    renderSetInfo(((Object) event).getPoseStack(), YdmItems.SET.get().getCardSet(itemStack), containerScreen.getGuiLeft());
                 }
                 else if(itemStack.getItem() == YdmItems.OPENED_SET.get())
                 {
-                    renderSetInfo(event.getPoseStack(), YdmItems.OPENED_SET.get().getCardSet(itemStack), containerScreen.getGuiLeft());
+                    renderSetInfo(((Object) event).getPoseStack(), YdmItems.OPENED_SET.get().getCardSet(itemStack), containerScreen.getGuiLeft());
                 }
                 else if(itemStack.getItem() instanceof CardSleevesItem)
                 {
-                    renderSleevesInfo(event.getPoseStack(), ((CardSleevesItem) itemStack.getItem()).sleeves, containerScreen.getGuiLeft());
+                    renderSleevesInfo(((Object) event).getPoseStack(), ((CardSleevesItem) itemStack.getItem()).sleeves, containerScreen.getGuiLeft());
                 }
             }
         }

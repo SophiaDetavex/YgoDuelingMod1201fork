@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import de.cas_ual_ty.ydm.clientutil.ScreenUtil;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -19,19 +20,17 @@ public class ReadyCheckboxWidget extends Button
     
     public ReadyCheckboxWidget(int xIn, int yIn, int widthIn, int heightIn, String msg, OnPress onPress, Supplier<Boolean> isChecked, Supplier<Boolean> isActive)
     {
-        super(xIn, yIn, widthIn, heightIn, Component.empty(), onPress);
+        super(xIn, yIn, widthIn, heightIn, Component.empty(), onPress, createNarration);
         this.isChecked = isChecked;
         this.isActive = isActive;
     }
     
-    @Override
-    public void render(PoseStack ms, int mouseX, int mouseY, float partial)
+    public void render(GuiGraphics ms, int mouseX, int mouseY, float partial)
     {
         active = isActive.get();
         super.render(ms, mouseX, mouseY, partial);
     }
     
-    @Override
     public void renderButton(PoseStack ms, int mouseX, int mouseY, float p_renderButton_3_)
     {
         Minecraft minecraft = Minecraft.getInstance();
@@ -41,12 +40,12 @@ public class ReadyCheckboxWidget extends Button
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.enableDepthTest();
-        blit(ms, x, y, 0, 46 + i * 20, width / 2, height);
-        blit(ms, x + width / 2, y, 200 - width / 2, 46 + i * 20, width / 2, height);
+        blit(ms, getX(), getY(), 0, 46 + i * 20, width / 2, height);
+        blit(ms, getX() + width / 2, getY(), 200 - width / 2, 46 + i * 20, width / 2, height);
         if(isChecked.get())
         {
             int j = getFGColor();
-            Screen.drawCenteredString(ms, minecraft.font, Component.literal("✔"), x + width / 2, y + (height - 8) / 2, j | Mth.ceil(alpha * 255.0F) << 24);
+            Screen.drawCenteredString(ms, minecraft.font, Component.literal("✔"), getX() + width / 2, getY() + (height - 8) / 2, j | Mth.ceil(alpha * 255.0F) << 24);
         }
     }
 }

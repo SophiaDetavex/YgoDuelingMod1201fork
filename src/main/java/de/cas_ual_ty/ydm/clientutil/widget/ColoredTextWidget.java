@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import de.cas_ual_ty.ydm.YDM;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
@@ -36,7 +37,6 @@ public class ColoredTextWidget extends AbstractWidget
         this(xIn, yIn, widthIn, heightIn, msgGetter, null);
     }
     
-    @Override
     public void renderButton(PoseStack ms, int mouseX, int mouseY, float partialTicks)
     {
         Minecraft minecraft = Minecraft.getInstance();
@@ -47,13 +47,13 @@ public class ColoredTextWidget extends AbstractWidget
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.enableDepthTest();
-        blit(ms, x, y, 0, offset + i * 20, width / 2, height / 2);
-        blit(ms, x + width / 2, y, 200 - width / 2, offset + i * 20, width / 2, height / 2);
-        blit(ms, x, y + height / 2, 0, offset + (i + 1) * 20 - height / 2, width / 2, height / 2);
-        blit(ms, x + width / 2, y + height / 2, 200 - width / 2, offset + (i + 1) * 20 - height / 2, width / 2, height / 2);
-        renderBg(ms, minecraft, mouseX, mouseY);
+        blit(ms, getX(), getY(), 0, offset + i * 20, width / 2, height / 2);
+        blit(ms, getX() + width / 2, getY(), 200 - width / 2, offset + i * 20, width / 2, height / 2);
+        blit(ms, getX(), getY() + height / 2, 0, offset + (i + 1) * 20 - height / 2, width / 2, height / 2);
+        blit(ms, getX() + width / 2, getY() + height / 2, 200 - width / 2, offset + (i + 1) * 20 - height / 2, width / 2, height / 2);
+        renderWidget(ms, minecraft, mouseX, mouseY);
         int j = getFGColor();
-        Screen.drawCenteredString(ms, fontrenderer, getMessage(), x + width / 2, y + (height - 8) / 2, j | Mth.ceil(alpha * 255.0F) << 24);
+        Screen.drawCenteredString(ms, fontrenderer, getMessage(), getX() + width / 2, getY() + (height - 8) / 2, j | Mth.ceil(alpha * 255.0F) << 24);
         
         if(isHoveredOrFocused() && tooltip != null)
         {
@@ -83,11 +83,5 @@ public class ColoredTextWidget extends AbstractWidget
     {
         offset = 60;
         return this;
-    }
-    
-    @Override
-    public void updateNarration(NarrationElementOutput pNarrationElementOutput)
-    {
-    
     }
 }

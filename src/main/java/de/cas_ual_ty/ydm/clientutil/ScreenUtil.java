@@ -2,13 +2,14 @@ package de.cas_ual_ty.ydm.clientutil;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.Matrix4f;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 
 import java.util.List;
+
+import org.joml.Matrix4fStack;
 
 public class ScreenUtil
 {
@@ -26,7 +27,7 @@ public class ScreenUtil
         BufferBuilder bufferbuilder = tessellator.getBuilder();
         
         RenderSystem.enableBlend();
-        RenderSystem.disableTexture();
+        RenderSystem.disableCull();
         
         // Use src_color * src_alpha
         // and dest_color * (1 - src_alpha) for colors
@@ -34,7 +35,7 @@ public class ScreenUtil
         
         //RenderSystem.setShaderColor(r, g, b, a);
         
-        Matrix4f m = ms.last().pose();
+        org.joml.Matrix4f m = ms.last().pose();
         
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
         bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);

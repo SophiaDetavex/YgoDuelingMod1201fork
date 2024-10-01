@@ -30,7 +30,6 @@ public class SmallTextWidget extends AbstractWidget
         this(xIn, yIn, widthIn, heightIn, msgGetter, null);
     }
     
-    @Override
     public void renderButton(PoseStack ms, int mouseX, int mouseY, float partialTicks)
     {
         Minecraft minecraft = Minecraft.getInstance();
@@ -41,14 +40,14 @@ public class SmallTextWidget extends AbstractWidget
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.enableDepthTest();
-        blit(ms, x, y, 0, 46 + i * 20, width / 2, height / 2);
-        blit(ms, x + width / 2, y, 200 - width / 2, 46 + i * 20, width / 2, height / 2);
-        blit(ms, x, y + height / 2, 0, 46 + (i + 1) * 20 - height / 2, width / 2, height / 2);
-        blit(ms, x + width / 2, y + height / 2, 200 - width / 2, 46 + (i + 1) * 20 - height / 2, width / 2, height / 2);
+        blit(ms, getX(), getY(), 0, 46 + i * 20, width / 2, height / 2);
+        blit(ms, getX() + width / 2, getY(), 200 - width / 2, 46 + i * 20, width / 2, height / 2);
+        blit(ms, getX(), getY() + height / 2, 0, 46 + (i + 1) * 20 - height / 2, width / 2, height / 2);
+        blit(ms, getX() + width / 2, getY() + height / 2, 200 - width / 2, 46 + (i + 1) * 20 - height / 2, width / 2, height / 2);
         renderBg(ms, minecraft, mouseX, mouseY);
         
-        int x = this.x + width / 2;
-        int y = this.y + height / 2;
+        int x = this.getX() + width / 2;
+        int y = this.getY() + height / 2;
         
         ms.pushPose();
         ms.scale(0.5F, 0.5F, 1F);
@@ -74,11 +73,5 @@ public class SmallTextWidget extends AbstractWidget
     public Component getMessage()
     {
         return msgGetter.get();
-    }
-    
-    @Override
-    public void updateNarration(NarrationElementOutput pNarrationElementOutput)
-    {
-    
     }
 }

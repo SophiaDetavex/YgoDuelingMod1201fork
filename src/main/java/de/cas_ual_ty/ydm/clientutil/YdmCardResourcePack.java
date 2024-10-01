@@ -1,4 +1,4 @@
-package de.cas_ual_ty.ydm.clientutil;
+ package de.cas_ual_ty.ydm.clientutil;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.collect.ImmutableSet;
@@ -8,7 +8,6 @@ import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.FilePackResources;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.ResourcePackFileNotFoundException;
 import net.minecraft.server.packs.metadata.MetadataSectionSerializer;
 import net.minecraft.util.GsonHelper;
 
@@ -51,7 +50,6 @@ public class YdmCardResourcePack extends FilePackResources
         return s;
     }
     
-    @Override
     protected InputStream getResource(String resourcePath) throws IOException
     {
         //TODO pack.png needs to be returned as well
@@ -69,7 +67,6 @@ public class YdmCardResourcePack extends FilePackResources
         }
     }
     
-    @Override
     public boolean hasResource(String resourcePath)
     {
         return getFile(resourcePath) != null;
@@ -134,7 +131,6 @@ public class YdmCardResourcePack extends FilePackResources
     {
     }
     
-    @Override
     public Collection<ResourceLocation> getResources(PackType type, String namespaceIn, String pathIn, Predicate<ResourceLocation> filterIn)
     {
         // This is only needed for fonts and sounds afaik
@@ -167,7 +163,6 @@ public class YdmCardResourcePack extends FilePackResources
         return null;
     }
     
-    @Override
     public String getName()
     {
         return "YDM Images";

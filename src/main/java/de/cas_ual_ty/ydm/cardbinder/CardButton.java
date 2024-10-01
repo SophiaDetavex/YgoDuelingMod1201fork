@@ -27,7 +27,6 @@ public class CardButton extends AbstractButton
         this.onPress = onPress;
     }
     
-    @Override
     public void renderButton(PoseStack ms, int mouseX, int mouseY, float partialTick)
     {
         CardHolder card = getCard();
@@ -35,7 +34,7 @@ public class CardButton extends AbstractButton
         {
             ScreenUtil.white();
             CardRenderUtil.bindMainResourceLocation(card);
-            YdmBlitUtil.fullBlit(ms, x + 1, y + 1, 16, 16);
+            YdmBlitUtil.fullBlit(ms, getX() + 1, getY() + 1, 16, 16);
             
             if(isHoveredOrFocused())
             {
@@ -47,8 +46,8 @@ public class CardButton extends AbstractButton
     protected void drawHover(PoseStack ms)
     {
         RenderSystem.disableDepthTest();
-        int x = this.x + 1;
-        int y = this.y + 1;
+        int x = this.getX() + 1;
+        int y = this.getY() + 1;
         RenderSystem.colorMask(true, true, true, false);
         int slotColor = -2130706433; // From ContainerScreen::slotColor
         fillGradient(ms, x, y, x + 16, y + 16, slotColor, slotColor);
@@ -66,10 +65,6 @@ public class CardButton extends AbstractButton
     {
         return cardHolder.apply(index);
     }
+
     
-    @Override
-    public void updateNarration(NarrationElementOutput pNarrationElementOutput)
-    {
-    
-    }
 }

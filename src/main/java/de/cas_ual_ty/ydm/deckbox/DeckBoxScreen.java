@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.clientutil.ScreenUtil;
 import de.cas_ual_ty.ydm.clientutil.YdmBlitUtil;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -28,16 +29,13 @@ public class DeckBoxScreen extends AbstractContainerScreen<DeckBoxContainer>
         imageHeight = 250;
         super.init();
     }
-    
-    @Override
-    public void render(PoseStack ms, int mouseX, int mouseY, float partialTicks)
+    public void render(GuiGraphics ms, int mouseX, int mouseY, float partialTicks)
     {
         renderBackground(ms);
         super.render(ms, mouseX, mouseY, partialTicks);
         renderTooltip(ms, mouseX, mouseY);
     }
     
-    @Override
     protected void renderLabels(PoseStack ms, int mouseX, int mouseY)
     {
         Slot s;
@@ -96,7 +94,6 @@ public class DeckBoxScreen extends AbstractContainerScreen<DeckBoxContainer>
         font.draw(ms, playerInventoryTitle.getVisualOrderText(), 8F, (float) (imageHeight - 96 + 2), 0x404040);
     }
     
-    @Override
     protected void renderBg(PoseStack ms, float partialTicks, int mouseX, int mouseY)
     {
         ScreenUtil.white();

@@ -1,5 +1,4 @@
 package de.cas_ual_ty.ydm;
-
 import de.cas_ual_ty.ydm.cardbinder.CardBinderMessages;
 import de.cas_ual_ty.ydm.cardbinder.UUIDHolder;
 import de.cas_ual_ty.ydm.cardinventory.JsonCardsManager;
@@ -62,7 +61,6 @@ import net.minecraftforge.registries.RegistryBuilder;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.File;
 import java.util.Random;
 import java.util.function.Supplier;
@@ -116,22 +114,13 @@ public class YDM
                 () -> de.cas_ual_ty.ydm.serverutil.ServerProxy::new);
         YDM.random = new Random();
         YDM.ydmItemGroup = new YdmItemGroup(YDM.MOD_ID, YdmItems.CARD_BACK);
-        YDM.cardsItemGroup = new YdmItemGroup(YDM.MOD_ID + ".cards", YdmItems.BLANC_CARD)
+        YDM.cardsItemGroup = ((Object) new YdmItemGroup(YDM.MOD_ID + ".cards", YdmItems.BLANC_CARD)
         {
-            @Override
-            public boolean hasSearchBar()
-            {
-                return true;
-            }
-        }.setBackgroundSuffix("item_search.png");
-        YDM.setsItemGroup = new YdmItemGroup(YDM.MOD_ID + ".sets", YdmItems.BLANC_SET)
+        }).setBackgroundImage("item_search.png");
+        YDM.setsItemGroup = ((Object) new YdmItemGroup(YDM.MOD_ID + ".sets", YdmItems.BLANC_SET)
         {
-            @Override
-            public boolean hasSearchBar()
-            {
-                return true;
-            }
-        }.setBackgroundSuffix("item_search.png");
+
+        }).setBackgroundImage("item_search.png");
         
         Pair<CommonConfig, ForgeConfigSpec> common = new ForgeConfigSpec.Builder().configure(CommonConfig::new);
         YDM.commonConfig = common.getLeft();

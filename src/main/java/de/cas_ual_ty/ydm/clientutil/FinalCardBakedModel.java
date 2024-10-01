@@ -1,9 +1,8 @@
 package de.cas_ual_ty.ydm.clientutil;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Quaternion;
 import com.mojang.math.Transformation;
-import com.mojang.math.Vector3f;
+
 import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.YdmDatabase;
 import de.cas_ual_ty.ydm.YdmItems;
@@ -14,6 +13,7 @@ import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockElement;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.texture.SpriteContents;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
@@ -26,8 +26,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.SimpleModelState;
 import net.minecraftforge.client.model.geometry.UnbakedGeometryHelper;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
@@ -158,7 +161,7 @@ public class FinalCardBakedModel implements BakedModel
                 mat.scale(0.5F, 0.5F, 0.5F);
                 break;
             case FIXED:
-                mat.mulPose(new Quaternion(Direction.UP.step(), 180F, true));
+                mat.mulPose(new Quaternionf());
                 break;
             default:
                 break;
@@ -189,7 +192,7 @@ public class FinalCardBakedModel implements BakedModel
         {
             ResourceLocation rl = new ResourceLocation(YDM.MOD_ID, "item/" + YDM.proxy.addCardItemTag("card_back"));
             TextureAtlasSprite sprite = textureGetter.apply(rl);
-            partneredBackList = convertTexture(Transformation.identity(), sprite, 0.5F, Direction.NORTH, 0xFFFFFFFF, 1, rl);
+            partneredBackList = (List<BakedQuad>) convertTexture(Transformation.identity(), sprite, 0.5F, Direction.NORTH, 0xFFFFFFFF, 1, rl);
         }
         
         return partneredBackList;
@@ -201,7 +204,7 @@ public class FinalCardBakedModel implements BakedModel
         {
             ResourceLocation rl = new ResourceLocation(YDM.MOD_ID, "item/" + YDM.proxy.addCardItemTag("blanc_card"));
             TextureAtlasSprite sprite = textureGetter.apply(rl);
-            blancList = convertTexture(Transformation.identity(), sprite, 0.5F, Direction.NORTH, 0xFFFFFFFF, 1, rl);
+            blancList = (List<BakedQuad>) convertTexture(Transformation.identity(), sprite, 0.5F, Direction.NORTH, 0xFFFFFFFF, 1, rl);
         }
         
         return blancList;
@@ -211,7 +214,7 @@ public class FinalCardBakedModel implements BakedModel
     {
         ModelState modelState = new SimpleModelState(new Transformation(Vector3f.ZERO, Quaternion.ONE, new Vector3f(1F, 1F, 1F), Quaternion.ONE));
         
-        List<BlockElement> unbaked = UnbakedGeometryHelper.createUnbakedItemElements(layerIdx, sprite);
+        List<BlockElement> unbaked = UnbakedGeometryHelper.createUnbakedItemMaskElements(layerIdx, sprite);
         unbaked.forEach(e ->
         {
             for(Direction d : Direction.values())
@@ -223,8 +226,8 @@ public class FinalCardBakedModel implements BakedModel
             }
             
             float z = (e.from.z() + e.to.z()) * 0.5F;
-            e.from.setZ(z + off * 0.1F);
-            e.to.setZ(z + off * 0.1F);
+            ((Object) e.from).setZ(z + off * 0.1F);
+            ((Object) e.to).setZ(z + off * 0.1F);
         });
         
         return UnbakedGeometryHelper.bakeElements(unbaked, m -> sprite, modelState, rl);

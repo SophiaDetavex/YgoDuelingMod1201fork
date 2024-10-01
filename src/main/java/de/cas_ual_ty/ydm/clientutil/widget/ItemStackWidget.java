@@ -41,7 +41,6 @@ public class ItemStackWidget extends AbstractWidget
         return this;
     }
     
-    @Override
     public void renderButton(PoseStack ms, int mouseX, int mouseY, float partial)
     {
         Minecraft minecraft = Minecraft.getInstance();
@@ -73,7 +72,7 @@ public class ItemStackWidget extends AbstractWidget
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                 PoseStack posestack = RenderSystem.getModelViewStack();
                 posestack.pushPose();
-                posestack.translate((float) x, (float) y, 100.0F + itemRenderer.blitOffset);
+                posestack.translate((float) getX(), (float) getY(), 100.0F + itemRenderer.ITEM_COUNT_BLIT_OFFSET);
                 posestack.translate(width / 2F, height / 2F, 0.0D);
                 posestack.scale(1.0F, -1.0F, 1.0F);
                 posestack.scale(width, height, 16.0F);
@@ -107,12 +106,6 @@ public class ItemStackWidget extends AbstractWidget
         RenderSystem.defaultBlendFunc();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
         
-        YdmBlitUtil.fullBlit(ms, x, y, width, height);
-    }
-    
-    @Override
-    public void updateNarration(NarrationElementOutput pNarrationElementOutput)
-    {
-    
+        YdmBlitUtil.fullBlit(ms, getX(), getY(), width, height);
     }
 }

@@ -43,7 +43,7 @@ public class CardItem extends Item
     {
         ItemStack itemStack = pPlayer.getItemInHand(pUsedHand);
         CardHolder cardHolder = getCardHolder(itemStack);
-        if(cardHolder != null && pPlayer.level.isClientSide)
+        if(cardHolder != null && pPlayer.level().isClientSide)
         {
             YDM.proxy.openCardInspectScreen(cardHolder);
             return InteractionResultHolder.success(itemStack);
@@ -83,7 +83,6 @@ public class CardItem extends Item
         return itemStack;
     }
     
-    @Override
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items)
     {
         if(!allowedIn(group))

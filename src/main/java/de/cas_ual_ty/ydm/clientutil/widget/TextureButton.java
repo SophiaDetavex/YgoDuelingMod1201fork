@@ -20,15 +20,15 @@ public class TextureButton extends Button
     public int texW;
     public int texH;
     
-    public TextureButton(int x, int y, int width, int height, Component title, OnPress pressedAction, OnTooltip onTooltip)
+    public <OnTooltip> TextureButton(int x, int y, int width, int height, Component title, OnPress pressedAction, OnTooltip onTooltip)
     {
-        super(x, y, width, height, title, pressedAction, onTooltip);
+        super(x, y, width, height, title, pressedAction, (CreateNarration) onTooltip);
         textureLocation = null;
     }
     
     public TextureButton(int x, int y, int width, int height, Component title, OnPress pressedAction)
     {
-        super(x, y, width, height, title, pressedAction);
+        super(x, y, width, height, title, pressedAction, createNarration);
         textureLocation = null;
     }
     
@@ -42,7 +42,6 @@ public class TextureButton extends Button
         return this;
     }
     
-    @Override
     public void renderButton(PoseStack ms, int mouseX, int mouseY, float partialTicks)
     {
         Minecraft minecraft = Minecraft.getInstance();
@@ -53,16 +52,16 @@ public class TextureButton extends Button
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.enableDepthTest();
-        blit(ms, x, y, 0, 46 + i * 20, width / 2, height / 2);
-        blit(ms, x + width / 2, y, 200 - width / 2, 46 + i * 20, width / 2, height / 2);
-        blit(ms, x, y + height / 2, 0, 46 + (i + 1) * 20 - height / 2, width / 2, height / 2);
-        blit(ms, x + width / 2, y + height / 2, 200 - width / 2, 46 + (i + 1) * 20 - height / 2, width / 2, height / 2);
-        renderBg(ms, minecraft, mouseX, mouseY);
+        blit(ms, getX(), getY(), 0, 46 + i * 20, width / 2, height / 2);
+        blit(ms, getX() + width / 2, getY(), 200 - width / 2, 46 + i * 20, width / 2, height / 2);
+        blit(ms, getX(), getY() + height / 2, 0, 46 + (i + 1) * 20 - height / 2, width / 2, height / 2);
+        blit(ms, getX() + width / 2, getY() + height / 2, 200 - width / 2, 46 + (i + 1) * 20 - height / 2, width / 2, height / 2);
+        renderButton(ms, minecraft, mouseX, mouseY);
         
         if(textureLocation != null)
         {
             RenderSystem.setShaderTexture(0, textureLocation);
-            YdmBlitUtil.blit(ms, x, y, width, height, texX, texY, texW, texH, 256, 256);
+            YdmBlitUtil.blit(ms, getX(), getY(), width, height, texX, texY, texW, texH, 256, 256);
         }
         
         if(isHoveredOrFocused())

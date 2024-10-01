@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.clientutil.ScreenUtil;
 import de.cas_ual_ty.ydm.clientutil.widget.ImprovedButton;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -25,7 +26,6 @@ public class CIIScreen<T extends CIIContainer> extends AbstractContainerScreen<T
     public CIIScreen(T container, Inventory playerInventory, Component title)
     {
         super(container, playerInventory, title);
-        passEvents = false;
         //int i = 222;
         //int j = 114;
         inventoryRows = 6;
@@ -42,15 +42,13 @@ public class CIIScreen<T extends CIIContainer> extends AbstractContainerScreen<T
         addRenderableWidget(nextButton = new ImprovedButton(leftPos + imageWidth - 12 - 8, topPos + 4, 12, 12, Component.translatable("generic.ydm.right_arrow"), this::onButtonClicked));
     }
     
-    @Override
-    public void render(PoseStack PoseStack, int mouseX, int mouseY, float partialTicks)
+    public void render(GuiGraphics PoseStack, int mouseX, int mouseY, float partialTicks)
     {
         renderBackground(PoseStack);
         super.render(PoseStack, mouseX, mouseY, partialTicks);
         renderTooltip(PoseStack, mouseX, mouseY);
     }
     
-    @Override
     protected void renderLabels(PoseStack ms, int x, int y)
     {
         MutableComponent title = Component.literal(this.title.getString());
@@ -58,7 +56,6 @@ public class CIIScreen<T extends CIIContainer> extends AbstractContainerScreen<T
         font.draw(ms, title, 8.0F, 6.0F, 0x404040);
     }
     
-    @Override
     protected void renderBg(PoseStack ms, float partialTicks, int x, int y)
     {
         ScreenUtil.white();

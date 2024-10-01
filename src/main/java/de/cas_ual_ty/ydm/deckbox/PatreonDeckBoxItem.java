@@ -14,7 +14,6 @@ public class PatreonDeckBoxItem extends DeckBoxItem
         super(properties);
     }
     
-    @Override
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items)
     {
         if(allowedIn(group))

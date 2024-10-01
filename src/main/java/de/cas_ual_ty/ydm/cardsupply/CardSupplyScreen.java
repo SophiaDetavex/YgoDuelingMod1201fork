@@ -10,6 +10,7 @@ import de.cas_ual_ty.ydm.cardinventory.CardInventory;
 import de.cas_ual_ty.ydm.clientutil.CardRenderUtil;
 import de.cas_ual_ty.ydm.clientutil.widget.ImprovedButton;
 import de.cas_ual_ty.ydm.rarity.Rarities;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -76,8 +77,7 @@ public class CardSupplyScreen extends AbstractContainerScreen<CardSupplyContaine
         updateCards();
     }
     
-    @Override
-    public void render(PoseStack ms, int mouseX, int mouseY, float partialTicks)
+    public void render(GuiGraphics ms, int mouseX, int mouseY, float partialTicks)
     {
         super.render(ms, mouseX, mouseY, partialTicks);
         renderTooltip(ms, mouseX, mouseY);
@@ -108,14 +108,12 @@ public class CardSupplyScreen extends AbstractContainerScreen<CardSupplyContaine
         }
     }
     
-    @Override
     protected void renderBg(PoseStack ms, float partialTicks, int x, int y)
     {
         RenderSystem.setShaderTexture(0, CardSupplyScreen.CARD_SUPPLY_GUI_TEXTURE);
         blit(ms, leftPos, topPos, 0, 0, imageWidth, imageHeight);
     }
     
-    @Override
     protected void renderLabels(PoseStack ms, int mouseX, int mouseY)
     {
         font.draw(ms, title, 8.0F, 6.0F, 0x404040);

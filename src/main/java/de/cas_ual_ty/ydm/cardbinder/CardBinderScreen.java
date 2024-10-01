@@ -9,6 +9,7 @@ import de.cas_ual_ty.ydm.clientutil.CardRenderUtil;
 import de.cas_ual_ty.ydm.clientutil.ScreenUtil;
 import de.cas_ual_ty.ydm.clientutil.widget.ImprovedButton;
 import de.cas_ual_ty.ydm.clientutil.widget.TextureButton;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -77,8 +78,7 @@ public class CardBinderScreen extends AbstractContainerScreen<CardBinderContaine
         addRenderableWidget(cardSearch = new EditBox(font, leftPos + imageWidth - 12 - 8 - 27 - 82, topPos + imageHeight - 96, 80, 12, Component.empty()));
     }
     
-    @Override
-    public void render(PoseStack ms, int mouseX, int mouseY, float partialTicks)
+    public void render(GuiGraphics ms, int mouseX, int mouseY, float partialTicks)
     {
         renderBackground(ms);
         super.render(ms, mouseX, mouseY, partialTicks);
@@ -102,7 +102,7 @@ public class CardBinderScreen extends AbstractContainerScreen<CardBinderContaine
                     }
                     
                     //renderTooltip
-                    renderComponentTooltip(ms, tooltip, mouseX, mouseY);
+                    renderWithTooltip(ms, tooltip, mouseX, mouseY);
                 }
                 
                 break;
@@ -110,7 +110,6 @@ public class CardBinderScreen extends AbstractContainerScreen<CardBinderContaine
         }
     }
     
-    @Override
     protected void renderLabels(PoseStack ms, int mouseX, int mouseY)
     {
         MutableComponent title = Component.literal(this.title.getString());
@@ -129,7 +128,6 @@ public class CardBinderScreen extends AbstractContainerScreen<CardBinderContaine
         font.draw(ms, playerInventoryTitle.getVisualOrderText(), 8.0F, (float) (imageHeight - 96 + 2), 0x404040);
     }
     
-    @Override
     protected void renderBg(PoseStack ms, float partialTicks, int mouseX, int mouseY)
     {
         ScreenUtil.white();

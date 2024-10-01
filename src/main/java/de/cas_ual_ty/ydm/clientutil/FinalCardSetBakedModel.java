@@ -1,7 +1,6 @@
 package de.cas_ual_ty.ydm.clientutil;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Quaternion;
 import com.mojang.math.Transformation;
 import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.YdmDatabase;
@@ -24,6 +23,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
+
+import org.joml.Quaternionf;
 
 @SuppressWarnings("deprecation")
 public class FinalCardSetBakedModel implements BakedModel
@@ -144,7 +145,7 @@ public class FinalCardSetBakedModel implements BakedModel
                 mat.scale(0.5F, 0.5F, 0.5F);
                 break;
             case FIXED:
-                mat.mulPose(new Quaternion(Direction.UP.step(), 180F, true));
+                mat.mulPose(new Quaternionf());
                 break;
             default:
                 break;

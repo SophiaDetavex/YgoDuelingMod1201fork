@@ -18,7 +18,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-@SuppressWarnings("deprecation")
 public class CardBakedModel implements IDynamicBakedModel
 {
     private BakedModel mainModel;

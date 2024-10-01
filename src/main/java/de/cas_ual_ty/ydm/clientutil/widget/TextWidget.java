@@ -30,7 +30,6 @@ public class TextWidget extends AbstractWidget
         this(xIn, yIn, widthIn, heightIn, msgGetter, null);
     }
     
-    @Override
     public void render(PoseStack ms, int mouseX, int mouseY, float partialTicks)
     {
         Minecraft minecraft = Minecraft.getInstance();
@@ -41,13 +40,13 @@ public class TextWidget extends AbstractWidget
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.enableDepthTest();
-        blit(ms, x, y, 0, 46 + i * 20, width / 2, height / 2);
-        blit(ms, x + width / 2, y, 200 - width / 2, 46 + i * 20, width / 2, height / 2);
-        blit(ms, x, y + height / 2, 0, 46 + (i + 1) * 20 - height / 2, width / 2, height / 2);
-        blit(ms, x + width / 2, y + height / 2, 200 - width / 2, 46 + (i + 1) * 20 - height / 2, width / 2, height / 2);
+        blit(ms, getX(), getY(), 0, 46 + i * 20, width / 2, height / 2);
+        blit(ms, getX() + width / 2, getY(), 200 - width / 2, 46 + i * 20, width / 2, height / 2);
+        blit(ms, getX(), getY() + height / 2, 0, 46 + (i + 1) * 20 - height / 2, width / 2, height / 2);
+        blit(ms, getX() + width / 2, getY() + height / 2, 200 - width / 2, 46 + (i + 1) * 20 - height / 2, width / 2, height / 2);
         renderBg(ms, minecraft, mouseX, mouseY);
         int j = getFGColor();
-        Screen.drawCenteredString(ms, fontrenderer, getMessage(), x + width / 2, y + (height - 8) / 2, j | Mth.ceil(alpha * 255.0F) << 24);
+        Screen.drawCenteredString(ms, fontrenderer, getMessage(), getX() + width / 2, getY() + (height - 8) / 2, j | Mth.ceil(alpha * 255.0F) << 24);
         
         if(isHoveredOrFocused() && tooltip != null)
         {
@@ -65,11 +64,5 @@ public class TextWidget extends AbstractWidget
     public Component getMessage()
     {
         return msgGetter.get();
-    }
-    
-    @Override
-    public void updateNarration(NarrationElementOutput pNarrationElementOutput)
-    {
-    
     }
 }
