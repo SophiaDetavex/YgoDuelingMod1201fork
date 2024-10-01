@@ -77,7 +77,6 @@ public abstract class CardSetBaseItem extends Item
         return itemStack.getOrCreateTag();
     }
     
-    @Override
     public abstract void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items);
     
     @Override

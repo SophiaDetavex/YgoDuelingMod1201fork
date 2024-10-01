@@ -139,9 +139,9 @@ public class YdmUtil
     
     public static void executeAdmitDefeatCommands(Player winner, Player loser)
     {
-        if(winner.level instanceof ServerLevel)
+        if(winner.level() instanceof ServerLevel)
         {
-            ServerLevel world = (ServerLevel) winner.level;
+            ServerLevel world = (ServerLevel) winner.level();
             MinecraftServer server = world.getServer();
             
             winner.getCapability(YDM.COOLDOWN_HOLDER).ifPresent(cdWinner ->
@@ -208,9 +208,9 @@ public class YdmUtil
     
     public static void executeDrawCommands(Player player1, Player player2)
     {
-        if(player1.level instanceof ServerLevel)
+        if(player1.level() instanceof ServerLevel)
         {
-            ServerLevel world = (ServerLevel) player1.level;
+            ServerLevel world = (ServerLevel) player1.level();
             MinecraftServer server = world.getServer();
             
             player1.getCapability(YDM.COOLDOWN_HOLDER).ifPresent(cd1 ->
