@@ -26,3 +26,6 @@ forge*changelog.txt
 
 # runData
 src/generated
+
+#Additional added by Sophia
+.DS_Store
