@@ -62,10 +62,6 @@ public class CardSetItem extends CardSetBaseItem
     @Override
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items)
     {
-        if(!allowedIn(group))
-        {
-            return;
-        }
         
         for(CardSet set : YdmDatabase.SETS_LIST)
         {

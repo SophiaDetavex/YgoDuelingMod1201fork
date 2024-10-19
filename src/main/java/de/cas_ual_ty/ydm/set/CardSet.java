@@ -69,6 +69,8 @@ public class CardSet
     
     public boolean isSubSet;
     public String shownCode;
+
+    public boolean isPatreonReward;
     
     public CardSet(String name, String code, String type, Date date, CardPuller pull, List<CardHolder> cards)
     {

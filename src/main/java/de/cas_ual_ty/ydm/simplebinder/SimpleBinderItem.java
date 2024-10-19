@@ -15,6 +15,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -85,7 +86,7 @@ public class SimpleBinderItem extends Item
     
     public static SimpleBinderItem makeItem(String modId, CreativeModeTab itemGroup, int pagesAmt)
     {
-        return new SimpleBinderItem(new Properties().tab(itemGroup).stacksTo(1), 6 * 9 * pagesAmt);
+        return new SimpleBinderItem(null, pagesAmt);
     }
     
     @Override
