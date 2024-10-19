@@ -8,6 +8,7 @@ import de.cas_ual_ty.ydm.duel.action.ActionIcon;
 import de.cas_ual_ty.ydm.duel.playfield.ZoneInteraction;
 import de.cas_ual_ty.ydm.duel.screen.IDuelScreenContext;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 
 import java.util.function.Consumer;
@@ -16,7 +17,9 @@ public class InteractionWidget extends Button
 {
     public final ZoneInteraction interaction;
     public final IDuelScreenContext context;
-    
+    @Override
+    public void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+    }
     public InteractionWidget(ZoneInteraction interaction, IDuelScreenContext context, int x, int y, int width, int height, Component title, Consumer<InteractionWidget> onPress, OnTooltip onTooltip)
     {
         super(x, y, width, height, title, (w) -> onPress.accept((InteractionWidget) w), onTooltip);
@@ -64,7 +67,7 @@ public class InteractionWidget extends Button
         if(isHoveredOrFocused() && active)
         {
             ScreenUtil.renderHoverRect(ms, getX(), getY(), width, height);
-            renderToolTip(ms, mouseX, mouseY);
+            renderwithTooltip(ms, mouseX, mouseY);
         }
         
         ms.popPose();

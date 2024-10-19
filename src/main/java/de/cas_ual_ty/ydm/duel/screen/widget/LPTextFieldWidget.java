@@ -3,6 +3,7 @@ package de.cas_ual_ty.ydm.duel.screen.widget;
 import com.mojang.blaze3d.vertex.PoseStack;
 import de.cas_ual_ty.ydm.clientutil.widget.ITooltip;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
 
@@ -95,5 +96,7 @@ public class LPTextFieldWidget extends EditBox
         enableBackgroundDrawing = enableBackgroundDrawingIn;
         super.setBordered(enableBackgroundDrawingIn);
     }
-
+    @Override
+    public void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+    }
 }

@@ -11,6 +11,8 @@ import de.cas_ual_ty.ydm.duel.PlayerRole;
 import de.cas_ual_ty.ydm.duel.network.DuelMessages;
 import de.cas_ual_ty.ydm.duel.screen.widget.RoleButtonWidget;
 import de.cas_ual_ty.ydm.duel.screen.widget.RoleOccupantsWidget;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
@@ -49,9 +51,9 @@ public class DuelScreenIdle<E extends DuelContainer> extends DuelContainerScreen
         addRenderableWidget(new ReadyCheckboxWidget(x + 80, y - 10, 20, 20, "Ready 2", (button) -> ready2ButtonClicked(), () -> getDuelManager().player2Ready, () -> getPlayerRole() == PlayerRole.PLAYER2 && getDuelManager().player1 != null));
     }
     
-    protected void renderLabels(PoseStack ms, int mouseX, int mouseY)
+    static void renderLabels(Font ms, int mouseX, int mouseY)
     {
-        font.draw(ms, "Waiting for players...", 8.0F, 6.0F, 0x404040);
+         GuiGraphics.drawString(ms, "Waiting for players...", (int) (int) 8.0F, 6.0F, 0x404040, duelChat);
     }
     
     @Override
@@ -117,5 +119,9 @@ public class DuelScreenIdle<E extends DuelContainer> extends DuelContainerScreen
         {
             YDM.channel.send(PacketDistributor.SERVER.noArg(), new DuelMessages.RequestReady(getHeader(), !getDuelManager().player2Ready));
         }
+    }
+
+    @Override
+    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
     }
 }

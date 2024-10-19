@@ -24,7 +24,11 @@ public class TextAnimation extends Animation
         this.centerPosX = centerPosX;
         this.centerPosY = centerPosY;
     }
-    
+    @Override
+    public boolean apply()
+    {
+        return true;
+    }
     @Override
     public void render(PoseStack ms, int mouseX, int mouseY, float partialTicks)
     {

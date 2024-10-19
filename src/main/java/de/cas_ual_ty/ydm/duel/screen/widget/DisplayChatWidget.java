@@ -100,4 +100,12 @@ public class DisplayChatWidget extends AbstractWidget
         ms.popPose();
     }
 
+    @Override
+    protected void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+    }
+
+    @Override
+    protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+    }
+
 }

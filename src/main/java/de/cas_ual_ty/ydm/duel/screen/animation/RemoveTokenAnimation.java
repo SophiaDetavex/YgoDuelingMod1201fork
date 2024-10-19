@@ -53,7 +53,11 @@ public class RemoveTokenAnimation extends Animation
         
         ms.popPose();
     }
-    
+    @Override
+    public boolean apply()
+    {
+        return true;
+    }
     public ResourceLocation getTexture()
     {
         return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/remove_token.png");

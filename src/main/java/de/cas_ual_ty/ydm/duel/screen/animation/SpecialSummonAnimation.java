@@ -26,7 +26,11 @@ public class SpecialSummonAnimation extends Animation
         this.size = size;
         this.endSize = endSize;
     }
-    
+    @Override
+    public boolean apply()
+    {
+        return true;
+    }
     @Override
     public void render(PoseStack ms, int mouseX, int mouseY, float partialTicks)
     {

@@ -86,7 +86,11 @@ public class ParallelListAnimation extends Animation
             }
         }
     }
-    
+    @Override
+    public boolean apply()
+    {
+        return true;
+    }
     @Override
     public void tick()
     {

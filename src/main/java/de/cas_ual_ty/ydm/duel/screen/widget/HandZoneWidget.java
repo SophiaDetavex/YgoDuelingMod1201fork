@@ -6,6 +6,7 @@ import de.cas_ual_ty.ydm.duel.playfield.DuelCard;
 import de.cas_ual_ty.ydm.duel.playfield.Zone;
 import de.cas_ual_ty.ydm.duel.screen.DuelScreenDueling;
 import de.cas_ual_ty.ydm.duel.screen.IDuelScreenContext;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 
 import javax.annotation.Nullable;
@@ -139,7 +140,9 @@ public class HandZoneWidget extends ZoneWidget
             return hoveredCard;
         }
     }
-    
+    @Override
+    public void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+    }
     @Override
     public boolean openAdvancedZoneView()
     {

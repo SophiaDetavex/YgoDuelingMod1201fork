@@ -67,7 +67,11 @@ public class QueueAnimation extends Animation
             a.render(ms, mouseX, mouseY, partialTicks);
         }
     }
-    
+    @Override
+    public boolean apply()
+    {
+        return true;
+    }
     @Override
     public void tick()
     {

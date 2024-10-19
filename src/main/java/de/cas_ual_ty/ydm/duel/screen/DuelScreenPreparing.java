@@ -16,6 +16,8 @@ import de.cas_ual_ty.ydm.duel.DuelContainer;
 import de.cas_ual_ty.ydm.duel.PlayerRole;
 import de.cas_ual_ty.ydm.duel.network.DuelMessages;
 import de.cas_ual_ty.ydm.duel.playfield.ZoneOwner;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.network.chat.Component;
@@ -87,9 +89,9 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
         }
     }
     
-    protected void renderLabels(PoseStack ms, int mouseX, int mouseY)
+    protected void renderLabels(Font ms, int mouseX, int mouseY)
     {
-        font.draw(ms, "Choose your decks...", 8.0F, 6.0F, 0x404040);
+         GuiGraphics.drawString(ms, "Choose your decks...", (int) 8.0F, (int) 6.0F, 0x404040);
         
         PlayerRole role = getPlayerRole();
         
@@ -104,7 +106,7 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
                 String text = "Waiting for other player...";
                 int width = font.width(text);
                 int height = font.lineHeight;
-                font.draw(ms, text, (imageWidth - width) / 2F, (this.height - height) / 2F, 0x404040);
+                 GuiGraphics.drawString(ms, text, (int) (imageWidth - width) / 2F, (int) (this.height - height) / 2F, 0x404040);
             }
         }
         else
@@ -112,7 +114,7 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
             String text = "Waiting for players...";
             int width = font.width(text);
             int height = font.lineHeight;
-            font.draw(ms, text, (imageWidth - width) / 2F, (imageHeight - height) / 2F, 0x404040);
+             GuiGraphics.drawString(ms, text, (imageWidth - width) / 2F, (imageHeight - height) / 2F, 0x404040);
         }
     }
     
@@ -151,15 +153,15 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
                 
                 // main deck
                 //drawString
-                font.draw(ms, Component.translatable("container.ydm.deck_box.main").append(" " + d.getMainDeckSize() + "/" + DeckHolder.MAIN_DECK_SIZE), guiLeft + 8F, guiTop + 6F, 0x404040);
+                GuiGraphics.drawString(ms, Component.translatable("container.ydm.deck_box.main").append(" " + d.getMainDeckSize() + "/" + DeckHolder.MAIN_DECK_SIZE), guiLeft + 8F, guiTop + 6F, 0x404040);
                 
                 // extra deck
                 //drawString
-                font.draw(ms, Component.translatable("container.ydm.deck_box.extra").append(" " + d.getExtraDeckSize() + "/" + DeckHolder.EXTRA_DECK_SIZE), guiLeft + 8F, guiTop + 92F, 0x404040);
+                GuiGraphics.drawString(ms, Component.translatable("container.ydm.deck_box.extra").append(" " + d.getExtraDeckSize() + "/" + DeckHolder.EXTRA_DECK_SIZE), (int) guiLeft + 8F, (int)guiTop + 92F, 0x404040);
                 
                 // side deck
                 //drawString
-                font.draw(ms, Component.translatable("container.ydm.deck_box.side").append(" " + d.getSideDeckSize() + "/" + DeckHolder.SIDE_DECK_SIZE), guiLeft + 8F, guiTop + 124F, 0x404040);
+                GuiGraphics.drawString(ms, Component.translatable("container.ydm.deck_box.side").append(" " + d.getSideDeckSize() + "/" + DeckHolder.SIDE_DECK_SIZE), (int) guiLeft + 8F, (int) guiTop + 124F, 0x404040);
                 
                 int size = 18;
                 CardHolder c;
@@ -460,5 +462,9 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
         {
             return source;
         }
+    }
+
+    @Override
+    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
     }
 }

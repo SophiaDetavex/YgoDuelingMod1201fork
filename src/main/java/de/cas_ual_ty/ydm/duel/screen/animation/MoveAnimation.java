@@ -45,7 +45,11 @@ public class MoveAnimation extends Animation
         destX = this.destinationZone.getAnimationDestX();
         destY = this.destinationZone.getAnimationDestY();
     }
-    
+    @Override
+    public boolean apply()
+    {
+        return true;
+    }
     @Override
     public void render(PoseStack ms, int mouseX, int mouseY, float partialTicks)
     {

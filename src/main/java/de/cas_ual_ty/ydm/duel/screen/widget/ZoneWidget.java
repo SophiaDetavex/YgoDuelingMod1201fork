@@ -13,7 +13,9 @@ import de.cas_ual_ty.ydm.duel.screen.DuelScreenDueling;
 import de.cas_ual_ty.ydm.duel.screen.IDuelScreenContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -30,7 +32,12 @@ public class ZoneWidget extends Button
     public DuelCard hoverCard;
 	private int x;
 	private int y;
-    
+    @Override
+    public void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+    }
+    @Override
+    public void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+    }
     public ZoneWidget(Zone zone, IDuelScreenContext context, int width, int height, Component title, Consumer<ZoneWidget> onPress, OnTooltip onTooltip)
     {
         super(0, 0, width, height, title, (w) -> onPress.accept((ZoneWidget) w), onTooltip);

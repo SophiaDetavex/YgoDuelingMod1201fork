@@ -16,10 +16,14 @@ import de.cas_ual_ty.ydm.duel.playfield.PlayField;
 import de.cas_ual_ty.ydm.duel.playfield.ZoneOwner;
 import de.cas_ual_ty.ydm.duel.screen.widget.DisplayChatWidget;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
@@ -49,7 +53,7 @@ public abstract class DuelContainerScreen<E extends DuelContainer> extends Switc
     
     protected Button duelChatButton;
     protected Button worldChatButton;
-    protected boolean duelChat;
+    protected static boolean duelChat;
     
     protected List<Component> worldChatMessages;
     
@@ -158,20 +162,21 @@ public abstract class DuelContainerScreen<E extends DuelContainer> extends Switc
         }
     }
     
-    public void renderTooltip(PoseStack ms, List<? extends FormattedCharSequence> tooltips, int mouseX, int mouseY)
+    public void renderTooltip(PoseStack ms, List<FormattedCharSequence> tooltips, int mouseX, int mouseY)
     {
-        ms.pushPose();
-        ms.translate(0, 0, 10D);
-        super.renderTooltip(ms, tooltips, mouseX, mouseY);
-        ms.popPose();
+        GuiGraphics ms2 = ms;
+        ((PoseStack) ms).pushPose();
+        ((PoseStack) ms).translate(0, 0, 10D);
+        super.renderWithTooltip(ms2, tooltips, (int) mouseX, (int) mouseY);
+        ((PoseStack) ms).popPose();
     }
     
-    public void renderTooltip(PoseStack ms, Component text, int mouseX, int mouseY)
+    public void renderTooltip(GuiGraphics ms, int text, int mouseX, int mouseY)
     {
-        ms.pushPose();
-        ms.translate(0, 0, 10D);
-        super.renderTooltip(ms, text, mouseX, mouseY);
-        ms.popPose();
+        ((PoseStack) ms).pushPose();
+        ((PoseStack) ms).translate(0, 0, 10D);
+        super.renderWithTooltip(ms, text, mouseX, mouseY);
+        ((PoseStack) ms).popPose();
     }
     
     public void renderDisabledTooltip(PoseStack ms, List<FormattedCharSequence> tooltips, int mouseX, int mouseY)
@@ -282,7 +287,7 @@ public abstract class DuelContainerScreen<E extends DuelContainer> extends Switc
             }
             else
             {
-                minecraft.player.chatSigned(text, null);
+                ((Object) minecraft.player).chatSigned(text, null);
             }
         }
         

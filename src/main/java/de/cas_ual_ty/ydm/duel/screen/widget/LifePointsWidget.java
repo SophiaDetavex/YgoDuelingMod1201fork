@@ -18,6 +18,9 @@ import java.util.function.Supplier;
 
 public class LifePointsWidget extends AbstractWidget
 {
+    @Override
+    public void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+    }
     public static final ResourceLocation DUEL_WIDGETS = new ResourceLocation(YDM.MOD_ID, "textures/gui/duel_widgets.png");
     
     public Supplier<Integer> lpGetter;
@@ -64,7 +67,7 @@ public class LifePointsWidget extends AbstractWidget
         ms.scale(0.5F, 0.5F, 1F);
         
         int j = getFGColor();
-        Screen.drawCenteredString(ms, fontrenderer, Component.literal(String.valueOf(lp)), x * 2, y * 2 - fontrenderer.lineHeight / 2, j | Mth.ceil(alpha * 255.0F) << 24);
+        GuiGraphics.drawCenteredString(fontrenderer, Component.literal(String.valueOf(lp)), x * 2, y * 2 - fontrenderer.lineHeight / 2, j | Mth.ceil(alpha * 255.0F) << 24);
         
         ms.popPose();
         
@@ -72,5 +75,9 @@ public class LifePointsWidget extends AbstractWidget
         {
             tooltip.onTooltip(this, ms, mouseX, mouseY);
         }
+    }
+
+    @Override
+    protected void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
     }
 }

@@ -4,12 +4,19 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import de.cas_ual_ty.ydm.duel.PlayerRole;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 
 import java.util.function.Supplier;
 
 public class RoleButtonWidget extends Button
 {
+    @Override
+    public void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+    }
+    @Override
+    public void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+    }
     public Supplier<Boolean> available;
     public PlayerRole role;
     

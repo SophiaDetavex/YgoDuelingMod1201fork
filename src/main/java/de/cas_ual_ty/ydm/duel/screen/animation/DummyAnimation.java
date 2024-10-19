@@ -13,4 +13,9 @@ public class DummyAnimation extends Animation
     public void render(PoseStack ms, int mouseX, int mouseY, float partialTicks)
     {
     }
+    @Override
+    public boolean apply()
+    {
+        return false;
+    }
 }

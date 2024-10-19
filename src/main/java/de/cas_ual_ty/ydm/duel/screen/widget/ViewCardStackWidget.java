@@ -10,7 +10,9 @@ import de.cas_ual_ty.ydm.duel.screen.DuelScreenDueling;
 import de.cas_ual_ty.ydm.duel.screen.IDuelScreenContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -29,7 +31,12 @@ public class ViewCardStackWidget extends Button
     protected int currentRow;
     protected List<DuelCard> cards;
     protected boolean forceFaceUp;
-    
+    @Override
+    public void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+    }
+    @Override
+    public void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+    }
     public ViewCardStackWidget(IDuelScreenContext context, int x, int y, int width, int height, Component title, Consumer<ViewCardStackWidget> onPress, OnTooltip onTooltip)
     {
         super(x, y, width, height, title, (button) -> onPress.accept((ViewCardStackWidget) button), onTooltip);

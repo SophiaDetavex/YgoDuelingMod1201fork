@@ -100,7 +100,11 @@ public class AttackAnimation extends Animation
         
         ms.popPose();
     }
-    
+    @Override
+    public boolean apply()
+    {
+        return true;
+    }
     public static float getRotationForPositionAndView(boolean isOpponentView, CardPosition position)
     {
         if(position.isStraight)
