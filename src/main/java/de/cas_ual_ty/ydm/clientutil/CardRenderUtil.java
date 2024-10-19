@@ -8,8 +8,7 @@ import de.cas_ual_ty.ydm.YdmItems;
 import de.cas_ual_ty.ydm.card.CardHolder;
 import de.cas_ual_ty.ydm.card.CardSleevesType;
 import de.cas_ual_ty.ydm.card.properties.Properties;
-import de.cas_ual_ty.ydm.cardbinder.CardBinderScreen;
-import de.cas_ual_ty.ydm.cardsupply.CardSupplyScreen;
+import de.cas_ual_ty.ydm.cardbinder.CardBinderContainer;
 import de.cas_ual_ty.ydm.duel.playfield.CardPosition;
 import de.cas_ual_ty.ydm.duel.playfield.DuelCard;
 import de.cas_ual_ty.ydm.rarity.RarityEntry;
@@ -39,9 +38,9 @@ public class CardRenderUtil
         CardRenderUtil.mainTextureBinder = new LimitedTextureBinder(ClientProxy.getMinecraft(), maxMainImages);
     }
     
-    public static void renderCardInfo(GuiGraphics ms, CardHolder card, int i)
+    public static void renderCardInfo(PoseStack poseStack, CardHolder card, Object i)
     {
-        CardRenderUtil.renderCardInfo(ms, card, i.getGuiLeft());
+        CardRenderUtil.renderCardInfo(poseStack, card, ((AbstractContainerScreen<CardBinderContainer>) i).getGuiLeft());
     }
     
     public static void renderCardInfo(PoseStack ms, CardHolder card)
@@ -173,7 +172,7 @@ public class CardRenderUtil
         
         // bind the texture depending on faceup or facedown
         CardRenderUtil.bindInfoResourceLocation(card);
-        YdmBlitUtil.fullBlit(pPoseStack, x - width / 2, y - height / 2, width, height);
+        YdmBlitUtil.fullBlit(pPoseStack.pose(), x - width / 2, y - height / 2, width, height);
         
         RarityEntry rarity = YdmDatabase.getRarity(card.getRarity());
         
@@ -188,16 +187,16 @@ public class CardRenderUtil
                 Runnable mask = () ->
                 {
                     RenderSystem.setShaderTexture(0, MASK_RL);
-                    YdmBlitUtil.fullBlit(pPoseStack, mouseX - width / 2, mouseY - height / 2, width, height);
+                    YdmBlitUtil.fullBlit(pPoseStack.pose(), mouseX - width / 2, mouseY - height / 2, width, height);
                 };
                 
                 Runnable renderer = () ->
                 {
                     RenderSystem.setShaderTexture(0, layer.getInfoImageResourceLocation());
-                    YdmBlitUtil.fullBlit(pPoseStack, x - width / 2, y - height / 2, width, height);
+                    YdmBlitUtil.fullBlit(pPoseStack.pose(), x - width / 2, y - height / 2, width, height);
                 };
                 
-                YdmBlitUtil.advancedMaskedBlit(pPoseStack, x, y, width, height, mask, renderer, layer.type.invertedRendering);
+                YdmBlitUtil.advancedMaskedBlit(pPoseStack.pose(), x, y, width, height, mask, renderer, layer.type.invertedRendering);
             }
         }
     }
@@ -296,3 +295,4 @@ public class CardRenderUtil
         
         CardRenderUtil.renderDuelCardReversed(ms, back, mouseX, mouseY, x, y, width, height, card, forceFaceUp);
     }
+}

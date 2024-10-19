@@ -22,7 +22,12 @@ public class ColoredTextWidget extends AbstractWidget
     public Supplier<Component> msgGetter;
     public ITooltip tooltip;
     public int offset;
-    
+    @Override
+    public void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+    }
+    @Override
+    public void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+    }
     public ColoredTextWidget(int xIn, int yIn, int widthIn, int heightIn, Supplier<Component> msgGetter, ITooltip tooltip)
     {
         super(xIn, yIn, widthIn, heightIn, Component.empty());

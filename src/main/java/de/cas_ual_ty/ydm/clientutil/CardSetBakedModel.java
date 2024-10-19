@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
-@SuppressWarnings("deprecation")
 public class CardSetBakedModel implements BakedModel
 {
     private BakedModel mainModel;

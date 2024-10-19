@@ -11,14 +11,15 @@ public class YdmItemGroup extends CreativeModeTab
 {
     private Supplier<Item> supplier;
     
-    public YdmItemGroup(String string, Supplier<Item> supplier)
+    public YdmItemGroup(Builder modId, Supplier<Item> supplier)
+    {
+        super(modId);
+        this.supplier = supplier;
+    }
+    public YdmItemGroup(Builder string, RegistryObject<Item> supplier)
     {
         super(string);
         this.supplier = supplier;
-    }
-    
-    public YdmItemGroup(String string, RegistryObject<Item> blancCard) {
-        //TODO Auto-generated constructor stub
     }
 
     public ItemStack makeIcon()

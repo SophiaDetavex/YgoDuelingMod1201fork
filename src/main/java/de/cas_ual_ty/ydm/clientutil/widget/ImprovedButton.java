@@ -43,7 +43,7 @@ public class ImprovedButton extends Button
         
         if(isHoveredOrFocused())
         {
-            renderToolTip(ms, mouseX, mouseY);
+            renderwithToolTip(ms, mouseX, mouseY);
         }
     }
 }

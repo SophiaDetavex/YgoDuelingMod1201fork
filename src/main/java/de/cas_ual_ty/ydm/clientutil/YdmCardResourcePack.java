@@ -4,6 +4,7 @@ import com.google.common.base.CharMatcher;
 import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonObject;
 import de.cas_ual_ty.ydm.YDM;
+import net.minecraft.ResourceLocationException;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.FilePackResources;
@@ -59,7 +60,7 @@ public class YdmCardResourcePack extends FilePackResources
         
         if(image == null)
         {
-            throw new ResourcePackFileNotFoundException(ClientProxy.cardImagesFolder, resourcePath);
+            throw new ResourceLocationException(resourcePath);
         }
         else
         {

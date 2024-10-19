@@ -25,4 +25,8 @@ public class YdmResourcePackFinder implements RepositorySource
     {
         return () -> new YdmCardResourcePack();
     }
+
+    @Override
+    public void loadPacks(Consumer<Pack> pOnLoad) {
+    }
 }

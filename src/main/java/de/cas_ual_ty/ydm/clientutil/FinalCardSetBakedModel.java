@@ -26,7 +26,6 @@ import java.util.function.Function;
 
 import org.joml.Quaternionf;
 
-@SuppressWarnings("deprecation")
 public class FinalCardSetBakedModel implements BakedModel
 {
     private BakedModel mainModel;
@@ -124,31 +123,22 @@ public class FinalCardSetBakedModel implements BakedModel
     {
         return mainModel.getOverrides();
     }
-    
-    @Override
-    public BakedModel applyTransform(ItemTransforms.TransformType t, PoseStack mat, boolean applyLeftHandTransform)
+
+    public BakedModel applyTransform(ItemTransforms t, PoseStack mat, boolean applyLeftHandTransform)
     {
-        switch(t)
-        {
-            case THIRD_PERSON_LEFT_HAND:
-            case THIRD_PERSON_RIGHT_HAND:
-            case FIRST_PERSON_LEFT_HAND:
-            case FIRST_PERSON_RIGHT_HAND:
+        switch (t) {
+            case THIRD_PERSON_LEFT_HAND, THIRD_PERSON_RIGHT_HAND, FIRST_PERSON_LEFT_HAND, FIRST_PERSON_RIGHT_HAND -> {
                 // m.setTranslation(new Vector3f(0f, 3.5f, 0f));
-                
+
                 mat.scale(0.5F, 0.5F, 0.5F);
                 mat.translate(0, 0.35, 0);
-                
-                break;
-            case GROUND:
+            }
+            case GROUND ->
                 // m.setTranslation(new Vector3f(0f, 4f, 0f));
-                mat.scale(0.5F, 0.5F, 0.5F);
-                break;
-            case FIXED:
-                mat.mulPose(new Quaternionf());
-                break;
-            default:
-                break;
+                    mat.scale(0.5F, 0.5F, 0.5F);
+            case FIXED -> mat.mulPose(new Quaternionf());
+            default -> {
+            }
         }
         
         BakedModel.super.applyTransform(t, mat, applyLeftHandTransform);

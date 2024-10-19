@@ -20,7 +20,7 @@ public class SmallTextButton extends Button
     
     public SmallTextButton(int x, int y, int width, int height, Component title, OnPress pressedAction)
     {
-        super(x, y, width, height, title, pressedAction, createNarration);
+        super(x, y, width, height, title, pressedAction, (CreateNarration) createNarration);
     }
     
     public void renderButton(PoseStack ms, int mouseX, int mouseY, float partialTicks)

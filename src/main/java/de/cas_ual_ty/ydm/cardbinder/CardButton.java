@@ -66,5 +66,9 @@ public class CardButton extends AbstractButton
         return cardHolder.apply(index);
     }
 
+    @Override
+    protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+    }
+
     
 }

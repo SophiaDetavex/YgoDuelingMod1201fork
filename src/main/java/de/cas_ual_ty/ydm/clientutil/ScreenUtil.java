@@ -46,7 +46,6 @@ public class ScreenUtil
         //tessellator.end();
         BufferUploader.drawWithShader(bufferbuilder.end());
         
-        RenderSystem.enableTexture();
         RenderSystem.disableBlend();
         
         //ScreenUtil.white();
@@ -64,7 +63,7 @@ public class ScreenUtil
             {
                 for(FormattedCharSequence p : fontRenderer.split(t, maxWidth))
                 {
-                    fontRenderer.drawShadow(ms, p, x, y, color);
+                    ((Object) fontRenderer).drawShadow(ms, p, x, y, color);
                     y += fontRenderer.lineHeight;
                 }
             }

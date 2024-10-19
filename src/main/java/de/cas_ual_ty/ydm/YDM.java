@@ -31,6 +31,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTab.Builder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
@@ -114,14 +115,14 @@ public class YDM
                 () -> de.cas_ual_ty.ydm.serverutil.ServerProxy::new);
         YDM.random = new Random();
         YDM.ydmItemGroup = new YdmItemGroup(YDM.MOD_ID, YdmItems.CARD_BACK);
-        YDM.cardsItemGroup = ((Object) new YdmItemGroup(YDM.MOD_ID + ".cards", YdmItems.BLANC_CARD)
+        YDM.cardsItemGroup = (CreativeModeTab) YdmItemGroup(YDM.MOD_ID + ".cards", YdmItems.BLANC_CARD);
         {
-        }).setBackgroundImage("item_search.png");
-        YDM.setsItemGroup = ((Object) new YdmItemGroup(YDM.MOD_ID + ".sets", YdmItems.BLANC_SET)
+            setBackgroundImage("item_search.png");
+        }
+        YDM.setsItemGroup = (CreativeModeTab) YdmItemGroup(YDM.MOD_ID + ".sets", YdmItems.BLANC_SET);
         {
-
-        }).setBackgroundImage("item_search.png");
-        
+            setBackgroundImage("item_search.png");
+        }
         Pair<CommonConfig, ForgeConfigSpec> common = new ForgeConfigSpec.Builder().configure(CommonConfig::new);
         YDM.commonConfig = common.getLeft();
         YDM.commonConfigSpec = common.getRight();

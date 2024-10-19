@@ -14,6 +14,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.network.PacketDistributor;
 
+import static de.cas_ual_ty.ydm.clientutil.YdmBlitUtil.blit;
+
 public class CIIScreen<T extends CIIContainer> extends AbstractContainerScreen<T>
 {
     private static final ResourceLocation CHEST_GUI_TEXTURE = new ResourceLocation("textures/gui/container/generic_54.png");
@@ -53,7 +55,7 @@ public class CIIScreen<T extends CIIContainer> extends AbstractContainerScreen<T
     {
         MutableComponent title = Component.literal(this.title.getString());
         title = title.append(" ").append(Component.literal((menu.getPage() + 1) + "/" + menu.getMaxPage()));
-        font.draw(ms, title, 8.0F, 6.0F, 0x404040);
+         GuiGraphics.drawString(ms, title, 8.0F, 6.0F, 0x404040);
     }
     
     protected void renderBg(PoseStack ms, float partialTicks, int x, int y)
@@ -87,5 +89,9 @@ public class CIIScreen<T extends CIIContainer> extends AbstractContainerScreen<T
         }
         
         return super.keyPressed(keyCode, scanCode, modifiers);
+    }
+
+    @Override
+    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
     }
 }

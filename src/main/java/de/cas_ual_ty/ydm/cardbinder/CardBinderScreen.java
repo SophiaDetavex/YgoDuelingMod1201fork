@@ -9,6 +9,7 @@ import de.cas_ual_ty.ydm.clientutil.CardRenderUtil;
 import de.cas_ual_ty.ydm.clientutil.ScreenUtil;
 import de.cas_ual_ty.ydm.clientutil.widget.ImprovedButton;
 import de.cas_ual_ty.ydm.clientutil.widget.TextureButton;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
@@ -17,6 +18,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.PacketDistributor;
 
 import java.util.ArrayList;
@@ -90,19 +92,21 @@ public class CardBinderScreen extends AbstractContainerScreen<CardBinderContaine
             {
                 if(button.getCard() != null)
                 {
-                    CardRenderUtil.renderCardInfo(ms, button.getCard(), this);
+                    GuiGraphics ms2 = ms;
+                    CardRenderUtil.renderCardInfo(((GuiGraphics) ms2).pose(), button.getCard(), this);
                     
                     List<Component> list = new LinkedList<>();
                     button.getCard().addInformation(list);
                     
-                    List<Component> tooltip = new ArrayList<>(list.size());
-                    for(Component t : list)
+                    Object tooltip = new ArrayList<>(list.size());
+                    ItemStack[] CastedList = (ItemStack[]) ((List<?>) ((Component) list).toFlatList()).toArray(new ItemStack[0]);
+                    for(ItemStack t : (ItemStack[]) CastedList)
                     {
-                        tooltip.add(t);
+                        ((Inventory) tooltip).add(t);
                     }
                     
                     //renderTooltip
-                    renderWithTooltip(ms, tooltip, mouseX, mouseY);
+                    renderWithTooltip(ms, (int) tooltip, mouseX, mouseY);
                 }
                 
                 break;
@@ -110,7 +114,7 @@ public class CardBinderScreen extends AbstractContainerScreen<CardBinderContaine
         }
     }
     
-    protected void renderLabels(PoseStack ms, int mouseX, int mouseY)
+    protected void renderLabels(Font ms, int mouseX, int mouseY)
     {
         MutableComponent title = Component.literal(this.title.getString());
         
@@ -123,9 +127,9 @@ public class CardBinderScreen extends AbstractContainerScreen<CardBinderContaine
             title = title.append(" ").append(Component.literal(menu.page + "/" + menu.clientMaxPage));
         }
         
-        font.draw(ms, title, 8.0F, 6.0F, 0x404040);
+        GuiGraphics.drawString(ms, title, 8.0F, 6.0F, 0x404040);
         
-        font.draw(ms, playerInventoryTitle.getVisualOrderText(), 8.0F, (float) (imageHeight - 96 + 2), 0x404040);
+        GuiGraphics.drawString(ms, playerInventoryTitle.getVisualOrderText(),  (int) 8.0F, (int) (imageHeight - 96 + 2), (int) 0x404040);
     }
     
     protected void renderBg(PoseStack ms, float partialTicks, int mouseX, int mouseY)
@@ -197,5 +201,9 @@ public class CardBinderScreen extends AbstractContainerScreen<CardBinderContaine
         }
         
         return super.keyPressed(keyCode, scanCode, modifiers);
+    }
+
+    @Override
+    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
     }
 }

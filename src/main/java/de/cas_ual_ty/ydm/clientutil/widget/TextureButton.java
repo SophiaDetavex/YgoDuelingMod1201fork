@@ -10,6 +10,8 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
+import static de.cas_ual_ty.ydm.clientutil.YdmBlitUtil.blit;
+
 
 public class TextureButton extends Button
 {
@@ -57,11 +59,11 @@ public class TextureButton extends Button
         blit(ms, getX(), getY() + height / 2, 0, 46 + (i + 1) * 20 - height / 2, width / 2, height / 2);
         blit(ms, getX() + width / 2, getY() + height / 2, 200 - width / 2, 46 + (i + 1) * 20 - height / 2, width / 2, height / 2);
         renderButton(ms, minecraft, mouseX, mouseY);
-        
+
         if(textureLocation != null)
         {
             RenderSystem.setShaderTexture(0, textureLocation);
-            YdmBlitUtil.blit(ms, getX(), getY(), width, height, texX, texY, texW, texH, 256, 256);
+            blit(ms, getX(), getY(), width, height, texX, texY, texW, texH, 256, 256);
         }
         
         if(isHoveredOrFocused())

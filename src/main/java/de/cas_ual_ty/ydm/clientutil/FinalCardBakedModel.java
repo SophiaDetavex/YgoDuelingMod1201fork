@@ -35,7 +35,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
 
-@SuppressWarnings("deprecation")
 public class FinalCardBakedModel implements BakedModel
 {
     private BakedModel mainModel;
@@ -82,7 +81,7 @@ public class FinalCardBakedModel implements BakedModel
                     if(!quadsMap.containsKey(card.getCard()))
                     {
                         ModelState modelState = new SimpleModelState(Transformation.identity());
-                        List<BlockElement> unbaked = UnbakedGeometryHelper.createUnbakedItemMaskElements(1, spriteFront);
+                        List<BlockElement> unbaked = UnbakedGeometryHelper.createUnbakedItemMaskElements(1, spriteFront.contents());
                         List<BakedQuad> baked = UnbakedGeometryHelper.bakeElements(unbaked, m -> spriteFront, modelState, front);
                         
                         List<BakedQuad> textureQuads = new ArrayList<>(0);
@@ -177,7 +176,7 @@ public class FinalCardBakedModel implements BakedModel
         if(singleBackList == null)
         {
             ResourceLocation rl = new ResourceLocation(YDM.MOD_ID, "item/" + YDM.proxy.addCardItemTag("card_back"));
-            TextureAtlasSprite sprite = textureGetter.apply(rl);
+            SpriteContents sprite = textureGetter.apply(rl).contents();
             singleBackList = new ArrayList<>(0);
             singleBackList.addAll(convertTexture(Transformation.identity(), sprite, 0.5F, Direction.SOUTH, 0xFFFFFFFF, 1, rl));
             singleBackList.addAll(convertTexture(Transformation.identity(), sprite, 0.5F, Direction.NORTH, 0xFFFFFFFF, 1, rl));
@@ -191,7 +190,7 @@ public class FinalCardBakedModel implements BakedModel
         if(partneredBackList == null)
         {
             ResourceLocation rl = new ResourceLocation(YDM.MOD_ID, "item/" + YDM.proxy.addCardItemTag("card_back"));
-            TextureAtlasSprite sprite = textureGetter.apply(rl);
+            SpriteContents sprite = textureGetter.apply(rl);
             partneredBackList = (List<BakedQuad>) convertTexture(Transformation.identity(), sprite, 0.5F, Direction.NORTH, 0xFFFFFFFF, 1, rl);
         }
         
@@ -210,11 +209,11 @@ public class FinalCardBakedModel implements BakedModel
         return blancList;
     }
     
-    public static List<BakedQuad> convertTexture(Transformation t, TextureAtlasSprite sprite, float off, Direction direction, int color, int layerIdx, ResourceLocation rl)
+    public static List<BakedQuad> convertTexture(Transformation t, SpriteContents sprite, float off, Direction direction, int color, int layerIdx, ResourceLocation rl)
     {
-        ModelState modelState = new SimpleModelState(new Transformation(Vector3f.ZERO, Quaternion.ONE, new Vector3f(1F, 1F, 1F), Quaternion.ONE));
+       ModelState modelState = new SimpleModelState(new Transformation(new Vector3f(), new Quaternionf(), new Vector3f(1F, 1F, 1F), new Quaternionf()));
         
-        List<BlockElement> unbaked = UnbakedGeometryHelper.createUnbakedItemMaskElements(layerIdx, sprite);
+        List<BlockElement> unbaked = UnbakedGeometryHelper.createUnbakedItemElements(layerIdx, sprite);
         unbaked.forEach(e ->
         {
             for(Direction d : Direction.values())
@@ -230,6 +229,6 @@ public class FinalCardBakedModel implements BakedModel
             ((Object) e.to).setZ(z + off * 0.1F);
         });
         
-        return UnbakedGeometryHelper.bakeElements(unbaked, m -> sprite, modelState, rl);
+        return UnbakedGeometryHelper.bakeElements(unbaked, m -> (TextureAtlasSprite) sprite, modelState, rl);
     }
 }

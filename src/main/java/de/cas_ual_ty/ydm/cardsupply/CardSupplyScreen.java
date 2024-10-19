@@ -10,6 +10,7 @@ import de.cas_ual_ty.ydm.cardinventory.CardInventory;
 import de.cas_ual_ty.ydm.clientutil.CardRenderUtil;
 import de.cas_ual_ty.ydm.clientutil.widget.ImprovedButton;
 import de.cas_ual_ty.ydm.rarity.Rarities;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
@@ -17,6 +18,7 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.PacketDistributor;
 import org.lwjgl.glfw.GLFW;
 
@@ -64,7 +66,7 @@ public class CardSupplyScreen extends AbstractContainerScreen<CardSupplyContaine
             for(int x = 0; x < CardInventory.DEFAULT_PAGE_COLUMNS; ++x)
             {
                 index = x + y * 9;
-                button = new CardButton(leftPos + 7 + x * 18, topPos + 17 + y * 18, 18, 18, index, this::onCardClicked, this::getCard);
+                button = new CardButton(leftPos + 7 + (x * 18), topPos + 17 + y * 18, 18, 18, index, this::onCardClicked, this::getCard);
                 cardButtons[index] = button;
                 addRenderableWidget(button);
             }
@@ -88,19 +90,20 @@ public class CardSupplyScreen extends AbstractContainerScreen<CardSupplyContaine
             {
                 if(button.getCard() != null)
                 {
-                    CardRenderUtil.renderCardInfo(ms, button.getCard(), this);
+                    CardRenderUtil.renderCardInfo(ms.pose(), button.getCard(), this);
                     
                     List<Component> list = new LinkedList<>();
                     button.getCard().addInformation(list);
                     
-                    List<Component> tooltip = new ArrayList<>(list.size());
-                    for(Component t : list)
+                    Object tooltip = new ArrayList<>(list.size());
+                    ItemStack[] CastedList = (ItemStack[]) ((List<?>) ((Component) list).toFlatList()).toArray(new ItemStack[0]);
+                    for(ItemStack t : (ItemStack[]) CastedList)
                     {
-                        tooltip.add(t);
+                        ((Inventory) tooltip).add(t);
                     }
                     
                     //renderTooltip
-                    renderComponentTooltip(ms, tooltip, mouseX, mouseY);
+                    renderWithTooltip(ms, (int) tooltip, mouseX, mouseY);
                 }
                 
                 break;
@@ -114,10 +117,10 @@ public class CardSupplyScreen extends AbstractContainerScreen<CardSupplyContaine
         blit(ms, leftPos, topPos, 0, 0, imageWidth, imageHeight);
     }
     
-    protected void renderLabels(PoseStack ms, int mouseX, int mouseY)
+    protected static void renderLabels(Font ms, int mouseX, int mouseY)
     {
-        font.draw(ms, title, 8.0F, 6.0F, 0x404040);
-        font.draw(ms, playerInventoryTitle.getVisualOrderText(), 8.0F, (float) (imageHeight - 96 + 2), 0x404040);
+         GuiGraphics.drawString(ms, title, (int) 8.0F, (int) 6.0F, (int) 0x404040);
+         GuiGraphics.drawString(ms, playerInventoryTitle.getVisualOrderText(), (int) 8.0F, (int) (imageHeight - 96 + 2), 0x404040);
     }
     
     @Override
@@ -210,5 +213,9 @@ public class CardSupplyScreen extends AbstractContainerScreen<CardSupplyContaine
     protected int scopeIndex(int cardButtonIndex)
     {
         return page * CardSupplyScreen.PAGE + cardButtonIndex;
+    }
+
+    @Override
+    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
     }
 }
