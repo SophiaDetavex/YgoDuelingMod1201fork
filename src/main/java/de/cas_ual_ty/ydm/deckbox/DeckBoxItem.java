@@ -182,5 +182,5 @@ public class DeckBoxItem extends Item implements MenuProvider
         });
         
         return finalNBT;
-    }
+    } 
 }

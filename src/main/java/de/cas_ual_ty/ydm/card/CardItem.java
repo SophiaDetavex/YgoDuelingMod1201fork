@@ -85,10 +85,6 @@ public class CardItem extends Item
     
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items)
     {
-        if(!allowedIn(group))
-        {
-            return;
-        }
         
         YdmDatabase.forAllCardVariants((card, imageIndex) ->
         {

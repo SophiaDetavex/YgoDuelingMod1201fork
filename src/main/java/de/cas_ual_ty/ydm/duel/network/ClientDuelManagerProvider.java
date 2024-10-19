@@ -87,7 +87,6 @@ public class ClientDuelManagerProvider implements IDuelManagerProvider
     
     public static void doForScreen(Consumer<DuelContainerScreen<? extends DuelContainer>> consumer)
     {
-        @SuppressWarnings("resource")
         Screen screen = ClientProxy.getMinecraft().screen;
         
         if(screen instanceof DuelContainerScreen)

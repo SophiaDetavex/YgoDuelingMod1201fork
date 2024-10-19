@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.clientutil.ScreenUtil;
 import de.cas_ual_ty.ydm.clientutil.YdmBlitUtil;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -36,68 +37,15 @@ public class DeckBoxScreen extends AbstractContainerScreen<DeckBoxContainer>
         renderTooltip(ms, mouseX, mouseY);
     }
     
-    protected void renderLabels(PoseStack ms, int mouseX, int mouseY)
-    {
-        Slot s;
-        int amount;
-        
-        // main deck
-        
-        amount = 0;
-        for(int i = DeckHolder.MAIN_DECK_INDEX_START; i < DeckHolder.MAIN_DECK_INDEX_END; ++i)
-        {
-            s = getMenu().getSlot(i);
-            
-            if(s != null && s.hasItem())
-            {
-                amount++;
-            }
-        }
-        
-        //drawString
-        font.draw(ms, Component.translatable("container.ydm.deck_box.main").append(" " + amount + "/" + DeckHolder.MAIN_DECK_SIZE), 8F, 6F, 0x404040);
-        
-        // extra deck
-        
-        amount = 0;
-        for(int i = DeckHolder.EXTRA_DECK_INDEX_START; i < DeckHolder.EXTRA_DECK_INDEX_END; ++i)
-        {
-            s = getMenu().getSlot(i);
-            
-            if(s != null && s.hasItem())
-            {
-                amount++;
-            }
-        }
-        
-        //drawString
-        font.draw(ms, Component.translatable("container.ydm.deck_box.extra").append(" " + amount + "/" + DeckHolder.EXTRA_DECK_SIZE), 8F, 92F, 0x404040);
-        
-        // side deck
-        
-        amount = 0;
-        for(int i = DeckHolder.SIDE_DECK_INDEX_START; i < DeckHolder.SIDE_DECK_INDEX_END; ++i)
-        {
-            s = getMenu().getSlot(i);
-            
-            if(s != null && s.hasItem())
-            {
-                amount++;
-            }
-        }
-        
-        //drawString
-        font.draw(ms, Component.translatable("container.ydm.deck_box.side").append(" " + amount + "/" + DeckHolder.SIDE_DECK_SIZE), 8F, 124F, 0x404040);
-        
-        font.draw(ms, Component.translatable("container.ydm.deck_box.sleeves"), 224F, (float) (imageHeight - 96 + 2), 0x404040);
-        
-        font.draw(ms, playerInventoryTitle.getVisualOrderText(), 8F, (float) (imageHeight - 96 + 2), 0x404040);
-    }
     
     protected void renderBg(PoseStack ms, float partialTicks, int mouseX, int mouseY)
     {
         ScreenUtil.white();
         RenderSystem.setShaderTexture(0, DeckBoxScreen.DECK_BOX_GUI_TEXTURE);
         YdmBlitUtil.blit(ms, leftPos, topPos, imageWidth, imageHeight, 0, 0, imageWidth, imageHeight, 512, 256);
+    }
+
+    @Override
+    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
     }
 }
